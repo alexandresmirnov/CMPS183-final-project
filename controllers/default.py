@@ -46,6 +46,7 @@ def index():
 # specific recipe
 # will get tags, ingredients, etc. and return everything
 def recipe():
+    logger.info("recipe")
 
 
 
