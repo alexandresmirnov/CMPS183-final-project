@@ -16,6 +16,11 @@
 def get_recipes():
     logger.info("get_recipes")
 
+    q = (db.recipes.id > 0)
+    recipes = db(q).select()
+
+    return recipes
+
 # this one actually populates ingredients/tags
 def get_recipes_populated():
     logger.info("get_recipes_populated")
@@ -24,6 +29,11 @@ def get_recipes_populated():
 # returns specific recipe by ID
 def get_recipe_by_id(id):
     logger.info("get_recipe_by_id")
+
+    q = (db.recipes.id == id)
+    recipe = db(q).select().first()
+
+    return response.json(dict(recipe = recipe))
 
 # returns array of ingredients for the recipe
 # note that this method will do some extra processing to turn
@@ -42,6 +52,7 @@ def get_tags_by_id(id):
 # list of recipes
 def index():
     logger.info("index")
+    logger.info(get_recipes())
     return dict(message=T('Welcome!'))
 
 # specific recipe
