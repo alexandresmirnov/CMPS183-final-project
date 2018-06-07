@@ -13,17 +13,15 @@ var my_url = "{{=URL('api', 'my_method')}}";
     <div class="container">
         <h1 class="my-4 text-center text-lg-left">Thumbnail Gallery</h1>
         <div class="row text-center text-lg-left">
-            <div class="col-lg-3 col-md-4 col-xs-6">
-                <h3>Title</h3>
-                <p>Quick description of the recipe</p>
-                <!--
-                <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
-                -->
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6">
-                <h3>Title 2</h3>
-                <p>Quick description of the recipe</p>
-            </div>
+
+
+            {{for recipe in recipes:}}
+                <div class="col-lg-3 col-md-4 col-xs-6">
+                    <h3>{{=recipe.name}}</h3>
+                    <p>{{=recipe.description}}</p>
+                    <img class="img-fluid img-thumbnail" src="{{=URL('default', 'download', args=recipe.image)}}" alt="">
+                </div>
+            {{pass}}
         </div>
     </div>
     <script src="{{=URL('static', 'js/default_index.js')}}"></script>

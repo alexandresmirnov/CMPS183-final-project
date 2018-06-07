@@ -52,8 +52,7 @@ def get_tags_by_id(id):
 # list of recipes
 def index():
     logger.info("index")
-    logger.info(get_recipes())
-    return dict(message=T('Welcome!'))
+    return dict(recipes = get_recipes())
 
 # specific recipe
 # will get tags, ingredients, etc. and return everything
