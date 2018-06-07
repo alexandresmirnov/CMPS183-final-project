@@ -49,6 +49,19 @@ def index():
 # expected format of /recipe/id
 def recipe():
     logger.info("recipe")
+    logger.info(request.args)
+
+    if request.args[0] is None:
+        redirect(URL('default', 'index'))
+
+    recipe_id = request.args[0]
+    response.flash = "Recipe ID: " + recipe_id
+
+    # get_recipe_by_id
+    # populate ingredients
+    # populate tags
+    # create JSON
+
     return dict(message=T('Welcome!'))
 
 
