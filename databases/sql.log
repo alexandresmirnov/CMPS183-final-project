@@ -119,3 +119,7 @@ CREATE TABLE "reviews"(
 success!
 =======
 >>>>>>> d1a67dc8f78be404755d255cac9a66092d77da59
+success!
+timestamp: 2018-06-06T18:08:33.096245
+ALTER TABLE "tags" ADD "name" CHAR(512);
+success!
