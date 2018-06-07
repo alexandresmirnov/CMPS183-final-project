@@ -123,3 +123,51 @@ success!
 timestamp: 2018-06-06T18:08:33.096245
 ALTER TABLE "tags" ADD "name" CHAR(512);
 success!
+timestamp: 2018-06-06T19:28:18.655954
+ALTER TABLE "recipes" ADD "cook_time" INTEGER;
+timestamp: 2018-06-06T19:28:18.674648
+ALTER TABLE "recipes" ADD "ingredient2" INTEGER;
+timestamp: 2018-06-06T19:28:18.693777
+ALTER TABLE "recipes" ADD "amount3" TEXT;
+timestamp: 2018-06-06T19:28:18.695621
+ALTER TABLE "recipes" ADD "amount2" TEXT;
+timestamp: 2018-06-06T19:28:18.719738
+ALTER TABLE "recipes" ADD "ingredient3" INTEGER;
+timestamp: 2018-06-06T19:28:18.756914
+ALTER TABLE "recipes" ADD "prep_time" INTEGER;
+timestamp: 2018-06-06T19:28:18.784458
+ALTER TABLE "recipes" ADD "amount1" TEXT;
+timestamp: 2018-06-06T19:28:18.786329
+ALTER TABLE "recipes" ADD "tags" TEXT;
+timestamp: 2018-06-06T19:28:18.787978
+ALTER TABLE "recipes" ADD "ingredient1" INTEGER;
+success!
+timestamp: 2018-06-06T19:28:18.887549
+CREATE TABLE "tag"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "name" CHAR(512),
+    "category1" CHAR(512),
+    "category2" CHAR(512)
+);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
