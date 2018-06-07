@@ -1,18 +1,82 @@
-{{extend 'layout.html'}}
-
-{{block head}}
+{{extend 'layout.html'}} {{block head}}
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
 <script>
-    var my_url = "{{=URL('api', 'my_method')}}";
+var my_url = "{{=URL('api', 'my_method')}}";
 </script>
 {{end}}
 
-<div class="main_content">
 
-    <div id="vue-div" class="display:none">
-        <!-- Your code goes here.  Remember to call $("#vue-div").show() once you get the data for the first time. -->
+<body>
+
+
+    <!-- Page Content -->
+    <div class="container">
+        <h1 class="my-4 text-center text-lg-left">Thumbnail Gallery</h1>
+        <div class="row text-center text-lg-left">
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                
+            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+          </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                
+            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+          </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                
+            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+          </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                
+            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+          </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                
+            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+          </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                
+            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+          </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                
+            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+          </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                
+            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+          </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                
+            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+          </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                
+            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+          </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                
+            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+          </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                
+            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+          </a>
+            </div>
+        </div>
     </div>
-
-</div>
-
-<script src="{{=URL('static', 'js/default_index.js')}}"></script>
+    <script src="{{=URL('static', 'js/default_index.js')}}"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{=URL('static', 'js/jquery.min.js')}}" ></script>
+    <script src="{{=URL('static', 'js/bootstrap.bundle.min.js')}}"></script>
+</body>
