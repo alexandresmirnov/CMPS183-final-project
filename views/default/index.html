@@ -11,7 +11,7 @@ var my_url = "{{=URL('api', 'my_method')}}";
 
     <!-- Page Content -->
     <div class="container">
-        <h1 class="my-4 text-center text-lg-left">Thumbnail Gallery</h1>
+        <h1 class="my-4 text-center text-lg-left">Foodguys Finest Recipes</h1>
         <div class="row text-center text-lg-left">
 
 
@@ -29,7 +29,7 @@ var my_url = "{{=URL('api', 'my_method')}}";
                     <p>{{=recipe.description}}</p>
                     <img class="img-fluid img-thumbnail" src="{{=URL('default', 'download', args=recipe.image)}}" alt="">
                 </div>
-            {{pass}}            
+            {{pass}}
         </div>
     </div>
     <script src="{{=URL('static', 'js/default_index.js')}}"></script>
