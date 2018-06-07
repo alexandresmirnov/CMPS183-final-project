@@ -33,7 +33,7 @@ def get_recipe_by_id(id):
     q = (db.recipes.id == id)
     recipe = db(q).select().first()
 
-    return response.json(dict(recipe = recipe))
+    return recipe
 
 # returns array of ingredients for the recipe
 # note that this method will do some extra processing to turn
@@ -61,18 +61,19 @@ def recipe():
     logger.info("recipe")
     logger.info(request.args)
 
-    if request.args[0] is None:
+    recipe_id = 0 
+    
+    if request.args(0) is None:
         redirect(URL('default', 'index'))
 
-    recipe_id = request.args[0]
-    response.flash = "Recipe ID: " + recipe_id
+    recipe_id = request.args(0)
 
     # get_recipe_by_id
     # populate ingredients
     # populate tags
     # create JSON
 
-    return dict(message=T('Welcome!'))
+    return dict(recipe = get_recipe_by_id(recipe_id))
 
 
 
