@@ -9,7 +9,7 @@
 
 db.define_table('recipes',
 				Field('name', 'text', required = True),
-				Field('image'),
+				Field('image', 'upload'),
 				Field('description', 'text'),
 				Field('instr', 'text'),
 				Field('prep_t', 'integer'),
@@ -19,11 +19,14 @@ db.define_table('recipes',
 db.define_table('ingredients',
 				Field('recipe_id', 'reference recipes'),
 
+
 )
 
-db.define_table('tags')
+db.define_table('tags',
+				Field('name'),
 
-db.define_table('concepts')
+)
+
 
 db.define_table('reviews',
 				Field('recipe_id', 'reference recipes'),
