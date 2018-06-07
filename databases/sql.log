@@ -64,7 +64,11 @@ CREATE TABLE "auth_cas"(
     "renew" CHAR(1)
 );
 success!
+<<<<<<< HEAD
 timestamp: 2018-06-06T16:56:48.947884
+=======
+timestamp: 2018-06-06T15:56:54.521047
+>>>>>>> d1a67dc8f78be404755d255cac9a66092d77da59
 CREATE TABLE "web2py_session_finalproject"(
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
     "locked" CHAR(1),
@@ -75,6 +79,7 @@ CREATE TABLE "web2py_session_finalproject"(
     "session_data" BLOB
 );
 success!
+<<<<<<< HEAD
 timestamp: 2018-06-06T17:01:23.168588
 CREATE TABLE "recipes"(
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -112,3 +117,5 @@ CREATE TABLE "reviews"(
     "body" TEXT
 );
 success!
+=======
+>>>>>>> d1a67dc8f78be404755d255cac9a66092d77da59
