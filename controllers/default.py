@@ -54,6 +54,10 @@ def index():
     logger.info("index")
     return dict(recipes = get_recipes())
 
+def index_vue():
+    logger.info("index_vue")
+    return dict(message = "TEST")
+
 # specific recipe
 # will get tags, ingredients, etc. and return everything
 # expected format of /recipe/id
