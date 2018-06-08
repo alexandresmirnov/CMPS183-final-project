@@ -65,21 +65,21 @@ var app = function() {
             recipes: [
                 {
                     id: 1,
-                    name: "name", 
+                    name: "salad",
                     description: "description",
-                    tags: [1, 3],
+                    tags: [1, 2],
                 },
                 {
                     id: 2,
-                    name: "name2", 
+                    name: "steak",
                     description: "description2",
-                    tags: [2, 3],
+                    tags: [2],
                 },
                 {
-                    id: 2,
-                    name: "name2", 
+                    id: 3,
+                    name: "Tofu Curry",
                     description: "description2",
-                    tags: [1],
+                    tags: [3],
                 },
             ],
             filtered_recipes: [],
