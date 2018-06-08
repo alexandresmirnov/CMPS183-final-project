@@ -30,8 +30,9 @@ var app = function() {
     self.func.toggle_tag = function(tag_index){
         console.log("toggle tag", tag_index);
 
+        var tag = self.vue.tags[tag_index];
 
-        self.vue.tags[tag_index].active = !self.vue.tags[tag_index].active;
+        self.vue.active_tags[tag.name] = !self.vue.active_tags[tag.name];
 
         self.func.update_filtered_recipes();
 
@@ -44,9 +45,11 @@ var app = function() {
         for(var i = 0; i < self.vue.recipes.length; i++){
             var recipe = self.vue.recipes[i];
             console.log("recipe: ", recipe);
+
             for(var j = 0; j < self.vue.tags.length; j++){
                 var tag = self.vue.tags[j];
-                if(tag.active && recipe.tags.includes(tag.id)){
+
+                if(self.vue.active_tags[tag.name] && recipe.tags.includes(tag.name)){
                     self.vue.filtered_recipes.push(recipe);
                     break;
                 }
@@ -67,22 +70,27 @@ var app = function() {
                     id: 1,
                     name: "name", 
                     description: "description",
-                    tags: [1, 3],
+                    tags: ["Vegetarian", "Vegan"],
                 },
                 {
                     id: 2,
                     name: "name2", 
                     description: "description2",
-                    tags: [2, 3],
+                    tags: ["Keto", "Vegan"],
                 },
                 {
                     id: 2,
                     name: "name2", 
                     description: "description2",
-                    tags: [1],
+                    tags: ["Vegetarian"],
                 },
             ],
             filtered_recipes: [],
+            active_tags: {
+                "Vegetarian": true,
+                "Keto": true,
+                "Vegan": true,
+            },
             tags: [
                 {
                     id: 1,
