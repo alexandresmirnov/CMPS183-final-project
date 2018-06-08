@@ -13,13 +13,80 @@ var my_url = "{{=URL('api', 'my_method')}}";
     <div class="container">
         <h1 class="my-4 text-center text-lg-left">FoodDudes Finest Recipes</h1>
         <div class="row text-center text-lg-left">
+          <div class="container">
 
+  <div class="row searchFilter" >
+     <div class="col-sm-12" >
+      <div class="input-group" >
+       <input id="table_filter" type="text" class="form-control" aria-label="Text input with segmented button dropdown" >
+       <div class="input-group-btn" >
+        
+        <button id="searchBtn" type="button" class="btn btn-secondary btn-search" ><span class="glyphicon glyphicon-search" >&nbsp;</span> <span class="label-icon" >Search</span></button>
+       </div>
+      </div>
+     </div>
+  </div>
+</div>
+          <div class="container">
+
+  <div class="row">
+    <div class="col-sm-12">
+      <p>Filter by :
+      <li><button type="button" class="btn btn-default btn-xs btn-tag">All</button></li>
+
+      <li><button type="button" class="btn btn-default btn-xs btn-tag">Vegetarian</button></li>
+      <li><button type="button" class="btn btn-default btn-xs btn-tag">Keto</button></li>
+      <li><button type="button" class="btn btn-default btn-xs btn-tag">Vegan</button></li>
+      <li><button type="button" class="btn btn-default btn-xs btn-tag">Gluten-Free</button></li>
+      <li><button type="button" class="btn btn-default btn-xs btn-tag">Healthy</button></li>
+      <li><button type="button" class="btn btn-default btn-xs btn-tag">Low-carb</button></li>
+      <li><button type="button" class="btn btn-default btn-xs btn-tag">Low-Sodium</button></li>
+
+      </p>
+    </div>
+    </div>
+  <div class="row">
+    <div class="col-sm-4" id="project1">
+      <div class="panel panel-default">
+        <div class="panel-heading title">
+          <h3 class="panel-title">Pancakes</h3>
+        </div>
+        <div class="panel-body">
+          Flour, milk..
+        </div>
+        <div class="panel-footer tag">
+          <span class="label label-primary hidden">tags go here</span>
+
+        </div>
+      </div>
+
+    </div>
+        <div class="col-sm-4" id="project2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Panel title 2</h3>
+        </div>
+        <div class="panel-body">
+          Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.
+        </div>
+        <div class="panel-footer">
+          <span class="label label-primary hidden">All</span>
+          <span class="label label-primary">Side Project</span>
+          <span class="label label-default">Bootstrap</span>
+          <span class="label label-default">jQuery</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
 
             {{for recipe in recipes:}}
                 <div class="col-lg-3 col-md-4 col-xs-6 text-truncate">
-                   
+
                         <h3><a href="{{=URL('default', 'recipe', args=[recipe.id])}}">{{=recipe.name}}</a></h3>
-   
+
                     <p>{{=recipe.description}}</p>
                     <img class="img-fluid img-thumbnail" src="{{=URL('default', 'download', args=recipe.image)}}" alt="">
                 </div>
