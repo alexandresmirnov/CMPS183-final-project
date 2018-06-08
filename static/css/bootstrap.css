@@ -627,6 +627,11 @@ pre code {
     margin-left: -15px
 }
 
+.black {
+    background-color: #111111;
+    color: #fff;
+}
+
 .no-gutters {
     margin-right: 0;
     margin-left: 0
@@ -4198,6 +4203,11 @@ input[type=submit].btn-block {
     float: none
 }
 
+.navbar-dropdown{
+    position: static;
+    float: none
+}
+
 .navbar-text {
     display: inline-block;
     padding-top: .5rem;
@@ -7597,6 +7607,34 @@ button.bg-dark:hover {
     overflow: visible;
     clip: auto;
     white-space: normal
+}
+
+@media all and (max-width:599px) {
+
+    .make-vis * {
+        max-height:1000px; 
+        overflow:visible
+    }
+
+}
+
+.container>.fill {
+    display: inline-block;
+    padding-right: 20px;
+    margin-right: -10px
+}
+
+@media all and (min-width:600px) {
+  .ham {display:none!important}
+  .burger.accordion * {max-height:1000px; overflow:visible}
+}
+
+.white {
+    background-color: #fff;
+    color: #111111;
+    -webkit-box-shadow: inset 0px 0px 0px 1px #ddd;
+    -moz-box-shadow: inset 0px 0px 0px 1px #ddd;
+    box-shadow: inset 0px 0px 0px 1px #ddd
 }
 
 .shadow-sm {

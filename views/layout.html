@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    
+
     <link href="{{=URL('static','css/custom.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{=URL('static','css/calendar.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{=URL('static','css/web2py.css')}}" rel="stylesheet" type="text/css"/>
@@ -20,32 +20,47 @@
       {{=response.flash}}
     </div>
     {{pass}}
-    <header class="black padded">
-      <div class="container middle max900">
-        <div class="fill middle">
-          <label class="ham padded fa fa-bars" for="menu"></label>
-          <div class="burger accordion">
-            <input type="checkbox" id="menu"/>
-            {{=MENU(response.menu,_class='menu')}}
-            <ul class="menu right">
-              <li>
-                {{=auth.navbar(mode='dropdown')}}
-              </li>
-            </ul>
-          </div>
+
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Start Bootstrap</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          {{=MENU(response.menu,_class='navbar-nav',ul_class='dropdown-menu',li_class='menu')}}
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+          </ul>
         </div>
       </div>
-    </header>
+    </nav>
+
+
+
     <main class="white">
       {{include}}
     </main>
     <footer class="black">
-      <div class="silver center padded social">
+      <div class="silver center  social">
         <a class="fa fa-facebook" href="https://www.facebook.com/sharer/sharer.php?u={url}"></a>
         <a class="fa fa-twitter" href="https://twitter.com/home?status={url}"></a>
         <a class="fa fa-google" href="https://plus.google.com/share?url={url}"></a>
       </div>
-      <div class="container padded max900">
+      <div class="container  max900">
         <div class="fill">
           Copyright @ 2016
         </div>
