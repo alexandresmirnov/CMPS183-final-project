@@ -12,8 +12,15 @@ db.define_table('recipes',
 				Field('image', 'upload'),
 				Field('description', 'text'),
 				Field('instr', 'text'),
-				Field('prep_t', 'integer'),
-				Field('cook_t', 'integer')
+				Field('prep_time', 'integer'),
+				Field('cook_time', 'integer'),
+				Field('ingredient1','text'),
+				Field('amount1','text'), 
+				Field('ingredient2','text'),
+				Field('amount2','text'), 
+				Field('ingredient3','text'),
+				Field('amount3','text'), 
+				Field('tags','list:reference tag')
 )
 
 db.define_table('ingredients',
@@ -22,8 +29,10 @@ db.define_table('ingredients',
 
 )
 
-db.define_table('tags',
+db.define_table('tag',
 				Field('name'),
+				Field('category1'),
+				Field('category2')
 
 )
 
