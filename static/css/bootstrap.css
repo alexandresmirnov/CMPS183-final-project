@@ -3239,7 +3239,8 @@ input[type=submit].btn-block {
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, .15);
-    border-radius: .25rem
+    border-radius: .25rem;
+    content: "";
 }
 
 .dropdown-menu-right {
