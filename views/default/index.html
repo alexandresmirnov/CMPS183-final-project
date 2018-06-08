@@ -20,7 +20,7 @@ var my_url = "{{=URL('api', 'my_method')}}";
       <div class="input-group" >
        <input id="table_filter" type="text" class="form-control" aria-label="Text input with segmented button dropdown" >
        <div class="input-group-btn" >
-        
+
         <button id="searchBtn" type="button" class="btn btn-secondary btn-search" ><span class="glyphicon glyphicon-search" >&nbsp;</span> <span class="label-icon" >Search</span></button>
        </div>
       </div>
@@ -32,15 +32,27 @@ var my_url = "{{=URL('api', 'my_method')}}";
   <div class="row">
     <div class="col-sm-12">
       <p>Filter by :
-      <li><button type="button" class="btn btn-default btn-xs btn-tag">All</button></li>
+        <label class="container">
+          <button type="button" class="btn btn-default btn-xs btn-tag">All</button>
+          <input type="checkbox" checked="checked">
+          <span class="checkmark"></span>
+        </label>
+        <label class="container">
+          <button type="button" class="btn btn-default btn-xs btn-tag">Vegetarian</button>
+          <input type="checkbox" checked="checked">
+          <span class="checkmark"></span>
+        </label>
+        <label class="container">
+          <button type="button" class="btn btn-default btn-xs btn-tag">Vegan</button>
+          <input type="checkbox" checked="checked">
+          <span class="checkmark"></span>
+        </label>
 
-      <li><button type="button" class="btn btn-default btn-xs btn-tag">Vegetarian</button></li>
-      <li><button type="button" class="btn btn-default btn-xs btn-tag">Keto</button></li>
-      <li><button type="button" class="btn btn-default btn-xs btn-tag">Vegan</button></li>
-      <li><button type="button" class="btn btn-default btn-xs btn-tag">Gluten-Free</button></li>
-      <li><button type="button" class="btn btn-default btn-xs btn-tag">Healthy</button></li>
-      <li><button type="button" class="btn btn-default btn-xs btn-tag">Low-carb</button></li>
-      <li><button type="button" class="btn btn-default btn-xs btn-tag">Low-Sodium</button></li>
+        <label class="container">
+          <button type="button" class="btn btn-default btn-xs btn-tag">Keto</button>
+          <input type="checkbox" checked="checked">
+          <span class="checkmark"></span>
+        </label>
 
       </p>
     </div>
@@ -57,23 +69,6 @@ var my_url = "{{=URL('api', 'my_method')}}";
         <div class="panel-footer tag">
           <span class="label label-primary hidden">tags go here</span>
 
-        </div>
-      </div>
-
-    </div>
-        <div class="col-sm-4" id="project2">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Panel title 2</h3>
-        </div>
-        <div class="panel-body">
-          Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.
-        </div>
-        <div class="panel-footer">
-          <span class="label label-primary hidden">All</span>
-          <span class="label label-primary">Side Project</span>
-          <span class="label label-default">Bootstrap</span>
-          <span class="label label-default">jQuery</span>
         </div>
       </div>
 
