@@ -2,5 +2,7 @@ cache/*
 errors/*
 sessions/*
 databases/*
+*.table
+*.log
 *.pyc
 *.swp

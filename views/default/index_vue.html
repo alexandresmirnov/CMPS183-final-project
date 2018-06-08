@@ -16,11 +16,24 @@ var API = {
 
     <!-- Page Content -->
     <div class="container" id="vue-div">
+
+		<div class="row">
+			<div class="col-sm-12">
+				<p>Filter by :
+
+					<button type="button" class="btn btn-default btn-xs btn-tag">All</button>
+					<button v-for="(tag, index) in tags" type="button" class="btn btn-default btn-xs btn-tag" v-on:click="toggle_tag(index)">${tag.name}, active: ${tag.active}</button>
+
+
+				</p>
+			</div>
+		</div>
+
         <h1 class="my-4 text-center text-lg-left">FoodDudes Finest Recipes</h1>
         <div class="row text-center text-lg-left">
 
 
-            <div class="col-lg-3 col-md-4 col-xs-6 text-truncate" v-for="recipe in recipes">
+            <div class="col-lg-3 col-md-4 col-xs-6 text-truncate" v-for="recipe in filtered_recipes">
                
                 <h3><a href="">${recipe.name}</a></h3>
 
