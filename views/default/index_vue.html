@@ -16,12 +16,38 @@ var API = {
 
     <!-- Page Content -->
     <div class="container" id="vue-div">
-        <h1 class="my-4 text-center text-lg-left">FoodDudes Finest Recipes</h1>
+      <h1 class="my-4 text-center text-lg-left">FoodDudes Finest Recipes</h1>
+      <div class="row searchFilter" >
+         <div class="col-sm-12" >
+          <div class="input-group" >
+           <input id="table_filter" type="text" class="form-control" aria-label="Text input with segmented button dropdown" >
+           <div class="input-group-btn" >
+
+            <button id="searchBtn" type="button" class="btn btn-secondary btn-search" ><span class="glyphicon glyphicon-search" >&nbsp;</span> <span class="label-icon" >Search</span></button>
+           </div>
+          </div>
+         </div>
+      </div>
+      <p> </p>
+
+		<div class="row">
+			<div class="col-sm-12">
+				<p>Filter by :
+          <label class="container">
+            <li><button type="button" class="btn btn-default btn-xs btn-tag">All</button> <input type="checkbox" checked="checked"></li>
+
+            <li v-for="(tag, index) in tags"><button type="button" class="btn btn-default btn-xs btn-tag" v-on:click="toggle_tag(index)">${tag.name}, active: ${tag.active}</button></li>
+
+          </label>
+
+				</p>
+			</div>
+		</div>
         <div class="row text-center text-lg-left">
 
 
-            <div class="col-lg-3 col-md-4 col-xs-6 text-truncate" v-for="recipe in recipes">
-               
+            <div class="col-lg-3 col-md-4 col-xs-6 text-truncate" v-for="recipe in filtered_recipes">
+
                 <h3><a href="">${recipe.name}</a></h3>
 
                 <p>${recipe.description}</p>

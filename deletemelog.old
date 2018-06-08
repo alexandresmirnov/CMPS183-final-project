@@ -351,6 +351,7 @@ success!
 success!
 success!
 success!
+<<<<<<< HEAD:deletemelog.old
 success!
 success!
 success!
@@ -506,3 +507,5 @@ success!
 success!
 success!
 success!
+=======
+>>>>>>> 02d379ea5f1a88b382fe6785364cc973388f3210:databases/sql.log
