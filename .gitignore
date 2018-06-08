@@ -1,5 +1,6 @@
 cache/*
 errors/*
 sessions/*
+databases/*
 *.pyc
 *.swp
