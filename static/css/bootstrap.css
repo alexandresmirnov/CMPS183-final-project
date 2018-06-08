@@ -8987,6 +8987,11 @@ button.bg-dark:hover {
     white-space: nowrap!important
 }
 
+.text-wrap {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
 .text-truncate {
     overflow: hidden;
     text-overflow: ellipsis;

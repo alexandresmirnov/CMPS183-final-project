@@ -11,11 +11,13 @@ var my_url = "{{=URL('api', 'my_method')}}";
 
     <!-- Page Content -->
     <div class="container" >
-        <div style="word-wrap: break-word">
-        <h1 class="my-4 text-center text-lg-left">{{=recipe.name}}</h1>
+
+            <h1 class="my-4 text-center text-lg-left">{{=recipe.name}}</h1>
+
         <p>{{=recipe.description}}</p>
         <img class="img-fluid img-thumbnail" src="{{=URL('default', 'download', args=recipe.image)}}" alt="">
-    </div>
+        
+        <h2 class = "text-lg-left"> Ingredients </h2>
     </div>
     <script src="{{=URL('static', 'js/default_index.js')}}"></script>
     <!-- Bootstrap core JavaScript -->
