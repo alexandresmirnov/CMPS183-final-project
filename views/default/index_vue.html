@@ -34,10 +34,10 @@ var API = {
 			<div class="col-sm-12">
 				<p>Filter by :
           <label class="container">
-            <button type="button" class="btn btn-default btn-xs btn-tag">All</button>
-            <button v-for="(tag, index) in tags" type="button" class="btn btn-default btn-xs btn-tag" v-on:click="toggle_tag(index)">${tag.name}, active: ${tag.active}</button>
-            <input type="checkbox" checked="checked">
-            <span class="checkmark"></span>
+            <li><button type="button" class="btn btn-default btn-xs btn-tag">All</button> <input type="checkbox" checked="checked"></li>
+
+            <li v-for="(tag, index) in tags"><button type="button" class="btn btn-default btn-xs btn-tag" v-on:click="toggle_tag(index)">${tag.name}, active: ${tag.active}</button></li>
+
           </label>
 
 				</p>

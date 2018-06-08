@@ -68,19 +68,19 @@ var app = function() {
             recipes: [
                 {
                     id: 1,
-                    name: "name", 
+                    name: "VV",
                     description: "description",
                     tags: ["Vegetarian", "Vegan"],
                 },
                 {
                     id: 2,
-                    name: "name2", 
+                    name: "tofu (keto,vegan)",
                     description: "description2",
                     tags: ["Keto", "Vegan"],
                 },
                 {
                     id: 2,
-                    name: "name2", 
+                    name: "just veg",
                     description: "description2",
                     tags: ["Vegetarian"],
                 },
