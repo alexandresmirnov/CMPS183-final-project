@@ -62,33 +62,34 @@ var API = {
     </div>
 
     <div class="col-sm-9 h-100">
-      <div class="row">
 
-        <div class="col-sm-6" v-for="recipe in filteredRecipes">
-          <div class="card mb-4">
-            <div class="card-body">
-              <h3 class="card-title">${recipe.name}</h2>
-              <p class="card-text">${recipe.description}<p/>
-              <a class="card-link" href="#">View recipe</a>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">Tags:</small>
-              <button 
-                v-for="tagName in recipe.tags" 
-                type="button" 
-                class="btn btn-light btn-sm mr-2"
-                v-bind:class="{
-                  'active': isActiveFilter(tagName)
-                }"
-                v-on:click="toggleTagByName(tagName)"
-              >
-                  ${tagName}
-              </button>
-            </div>
-          </div>
-        </div>
+			<div class="card-columns" id="recipe-card-columns">
+				<div class="card" v-for="recipe in filteredRecipes">
+					<div class="card-body">
+						<h3 class="card-title">${recipe.name}</h2>
+						<p class="card-text">${recipe.description}<p/>
+						<a class="card-link" href="#">View recipe</a>
+					</div>
+					<div class="card-footer">
+						<small class="text-muted">Tags:</small>
+						<button 
+							v-for="tagName in recipe.tags" 
+							type="button" 
+							class="btn btn-light btn-sm mr-2"
+							v-bind:class="{
+								'active': isActiveFilter(tagName)
+							}"
+							v-on:click="toggleTagByName(tagName)"
+						>
+								${tagName}
+						</button>
 
-      </div>
+					</div>
+					<!-- end card-footer -->
+				</div>
+				<!-- end card -->
+			</div>
+			<!-- end card-columns -->
 
     </div>
     <!--- end col-sm-9 (recipes column -->
