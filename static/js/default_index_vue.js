@@ -18,8 +18,8 @@ var app = function() {
     };
 
 
-    self.func.data.get_recipes = function(){
-        $.post(API.get_recipes,
+    self.func.data.getRecipes = function(){
+        $.post(API.getRecipes,
             {},
             function(data){
                 self.vue.recipes = data.recipes;
@@ -27,34 +27,34 @@ var app = function() {
         );
     };
 
-    self.func.toggle_tag = function(tag_index){
-        console.log("toggle tag", tag_index);
+    self.func.toggleTag = function(tagIndex){
+        console.log("toggle tag", tagIndex);
 
-        var tag = self.vue.tags[tag_index];
+        var tag = self.vue.tags[tagIndex];
 
-        self.vue.active_tags[tag.name] = !self.vue.active_tags[tag.name];
+        self.vue.activeTags[tag.name] = !self.vue.activeTags[tag.name];
 
-        self.func.update_filtered_recipes();
+        self.func.updateFilteredRecipes();
 
 
-        filters_on = false;
+        filtersOn = false;
 
-        for(var tag_name in self.vue.active_tags){
-            if(self.vue.active_tags.hasOwnProperty(tag_name)){
-              if(self.vue.active_tags[tag_name]){
-                filters_on = true;
+        for(var tagName in self.vue.activeTags){
+            if(self.vue.activeTags.hasOwnProperty(tagName)){
+              if(self.vue.activeTags[tagName]){
+                filtersOn = true;
                 break;
               }
             }
         }
 
-        self.vue.filters_on = filters_on;
+        self.vue.filtersOn = filtersOn;
     };
 
 
-    self.func.update_filtered_recipes = function(){
+    self.func.updateFilteredRecipes = function(){
         // TODO: optimize this
-        self.vue.filtered_recipes = [];
+        self.vue.filteredRecipes = [];
 
         for(var i = 0; i < self.vue.recipes.length; i++){
             var recipe = self.vue.recipes[i];
@@ -63,28 +63,28 @@ var app = function() {
             for(var j = 0; j < self.vue.tags.length; j++){
                 var tag = self.vue.tags[j];
 
-                if(self.vue.active_tags[tag.name] && recipe.tags.includes(tag.name)){
-                    self.vue.filtered_recipes.push(recipe);
+                if(self.vue.activeTags[tag.name] && recipe.tags.includes(tag.name)){
+                    self.vue.filteredRecipes.push(recipe);
                     break;
                 }
             }
         }
 
-        console.log(self.vue.filtered_recipes);
+        console.log(self.vue.filteredRecipes);
     };
 
-    self.func.display_recipes = function(){
+    self.func.displayRecipes = function(){
 
-      console.log(this.$data.filters_on);
+      console.log(this.$data.filtersOn);
 
-      if(this.$data.filters_on)
-        return this.$data.filtered_recipes;
+      if(this.$data.filtersOn)
+        return this.$data.filteredRecipes;
       else
         return this.$data.recipes;
     };
 
-    self.func.is_active_tag = function(tag_name){
-        return this.$data.active_tags[tag_name];
+    self.func.isActiveTag = function(tagName){
+        return this.$data.activeTags[tagName];
     };
 
     // Complete as needed.
@@ -131,9 +131,9 @@ var app = function() {
                     tags: ["Vegetarian"],
                 },
             ],
-            filtered_recipes: [],
-            filters_on: false,
-            active_tags: {
+            filteredRecipes: [],
+            filtersOn: false,
+            activeTags: {
                 "Vegetarian": false,
                 "Keto": false,
                 "Vegan": false,
@@ -160,7 +160,7 @@ var app = function() {
     });
 
     //self.func.data.get_recipes();
-    self.func.update_filtered_recipes();
+    self.func.updateFilteredRecipes();
 
     return self;
 };
