@@ -32,16 +32,16 @@ var app = function() {
 
         var tag = self.vue.tags[tagIndex];
 
-        self.vue.activeTags[tag.name] = !self.vue.activeTags[tag.name];
+        self.vue.activeFilters[tag.name] = !self.vue.activeFilters[tag.name];
 
         self.func.updateFilteredRecipes();
 
 
         filtersOn = false;
 
-        for(var tagName in self.vue.activeTags){
-            if(self.vue.activeTags.hasOwnProperty(tagName)){
-              if(self.vue.activeTags[tagName]){
+        for(var tagName in self.vue.activeFilters){
+            if(self.vue.activeFilters.hasOwnProperty(tagName)){
+              if(self.vue.activeFilters[tagName]){
                 filtersOn = true;
                 break;
               }
@@ -60,13 +60,19 @@ var app = function() {
             var recipe = self.vue.recipes[i];
             console.log("recipe: ", recipe);
 
-            for(var j = 0; j < self.vue.tags.length; j++){
-                var tag = self.vue.tags[j];
+            var fitsFilters = true;
 
-                if(self.vue.activeTags[tag.name] && recipe.tags.includes(tag.name)){
-                    self.vue.filteredRecipes.push(recipe);
+            for(var filterName in self.vue.activeFilters){
+                if(self.vue.activeFilters.hasOwnProperty(filterName)){
+                  if(self.vue.activeFilters[filterName] && !recipe.tags.includes(filterName)){
+                    fitsFilters = false;
                     break;
+                  }
                 }
+            }
+
+            if(fitsFilters){
+              self.vue.filteredRecipes.push(recipe);
             }
         }
 
@@ -83,8 +89,8 @@ var app = function() {
         return this.$data.recipes;
     };
 
-    self.func.isActiveTag = function(tagName){
-        return this.$data.activeTags[tagName];
+    self.func.isActiveFilter = function(tagName){
+        return this.$data.activeFilters[tagName];
     };
 
     // Complete as needed.
@@ -133,7 +139,7 @@ var app = function() {
             ],
             filteredRecipes: [],
             filtersOn: false,
-            activeTags: {
+            activeFilters: {
                 "Vegetarian": false,
                 "Keto": false,
                 "Vegan": false,

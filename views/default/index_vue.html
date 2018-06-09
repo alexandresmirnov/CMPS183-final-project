@@ -39,7 +39,7 @@ var API = {
       <div class="row">
 				<div class="col-sm-3 h-100">
 					<div class="list-group">
-    <button v-for="(tag, index) in tags" type="button" v-bind:class="{'active': isActiveTag(tag.name)}" class="list-group-item list-group-item-action" v-on:click="toggleTag(index)">${tag.name}</button>
+    <button v-for="(tag, index) in tags" type="button" v-bind:class="{'active': isActiveFilter(tag.name)}" class="list-group-item list-group-item-action" v-on:click="toggleTag(index)">${tag.name}</button>
 					</div>
 				</div>
 
