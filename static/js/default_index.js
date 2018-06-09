@@ -53,39 +53,14 @@ var app = function() {
 
     // gets all recipes from getRecipes API endpoint
     self.func.getRecipes = function(){
+        console.log("getRecipes");
         $.post(API.getRecipes,
             {},
             function(data){
-                self.vue.allRecipes = data.recipes;
+                console.log("data: ", data);
+                //self.vue.allRecipes = data.recipes;
             }
         );
-    };
-
-    // toggles whether or not a tag is considered active in activeFilters
-    // called from front-end, tagIndex is index inside tags[] array (not ID)
-    self.func.toggleTag = function(tagIndex){
-        console.log("toggle tag", tagIndex);
-
-        var tag = self.vue.tags[tagIndex];
-
-        self.vue.activeFilters[tag.name] = !self.vue.activeFilters[tag.name];
-
-
-
-        filtersOn = false;
-
-        for(var tagName in self.vue.activeFilters){
-            if(self.vue.activeFilters.hasOwnProperty(tagName)){
-              if(self.vue.activeFilters[tagName]){
-                filtersOn = true;
-                break;
-              }
-            }
-        }
-
-        self.vue.filtersOn = filtersOn;
-
-        self.func.updateFilteredRecipes();
     };
 
     // uses searchString (bound to input using v-model) to look through recipes
@@ -161,10 +136,42 @@ var app = function() {
     };
 
 
+
+    // same as toggleTag, but done by tag name
+    // toggles whether or not a tag is considered active in activeFilters
+    self.func.toggleTagByName = function(tagName){
+
+      self.vue.activeFilters[tagName] = !self.vue.activeFilters[tagName];
+
+      filtersOn = false;
+
+      for(var tagName in self.vue.activeFilters){
+        if(self.vue.activeFilters.hasOwnProperty(tagName)){
+          if(self.vue.activeFilters[tagName]){
+            filtersOn = true;
+            break;
+          }
+        }
+      }
+
+      self.vue.filtersOn = filtersOn;
+
+      self.func.updateFilteredRecipes();
+
+    };
+
+    // toggle by index inside tags[] array
+    self.func.toggleTagByindex = function(tagIndex){
+        var tag = self.vue.tags[tagIndex];
+
+        self.func.toggleTagByName(tag.name);
+    };
+
     // helper function, checks is filter is active
     self.func.isActiveFilter = function(tagName){
         return this.$data.activeFilters[tagName];
     };
+
 
     // Complete as needed.
     self.vue = new Vue({
@@ -223,23 +230,21 @@ var app = function() {
                 {
                     id: 1,
                     name: "Vegetarian",
-                    active: true,
                 },
                 {
                     id: 2,
                     name: "Keto",
-                    active: true,
                 },
                 {
                     id: 3,
                     name: "Vegan",
-                    active: true,
                 },
             ],
         },
         methods: self.func
     });
 
+    self.func.getRecipes();
     self.func.updateFilteredRecipes();
 
     return self;
