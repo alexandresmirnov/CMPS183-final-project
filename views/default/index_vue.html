@@ -1,5 +1,6 @@
 {{extend 'layout.html'}} {{block head}}
-<script src="{{=URL('static', 'js/vue.js')}}"></script>
+<script src="{{=URL('static', 'js/default_index_vue.js')}}"></script>
+
 <script>
 
 var API = {
@@ -10,29 +11,34 @@ var API = {
 </script>
 {{end}}
 
+<main role="main" id="vue-div">
 
-<body>
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="display-3">The Food Dude</h1>
+    <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+  </div>
+</div>
 
+<div class="container">
 
-    <!-- Page Content -->
-    <div class="container" id="vue-div">
-      <h1 class="my-4 text-center text-lg-left">FoodDudes Finest Recipes</h1>
-      <div class="row searchFilter" >
-         <div class="col-sm-12" >
-          <div class="input-group" >
-           <input id="table_filter" type="text" class="form-control" aria-label="Text input with segmented button dropdown" >
-           <div class="input-group-btn" >
+  <div class="row searchFilter" >
+    <div class="col-sm-12" >
+      <div class="input-group" >
+        <input id="table_filter" type="text" class="form-control" aria-label="Text input with segmented button dropdown" >
+        <div class="input-group-btn" >
 
-            <button id="searchBtn" type="button" class="btn btn-secondary btn-search" ><span class="glyphicon glyphicon-search" >&nbsp;</span> <span class="label-icon" >Search</span></button>
-           </div>
-          </div>
-         </div>
+          <button id="searchBtn" type="button" class="btn btn-secondary btn-search" ><span class="glyphicon glyphicon-search" >&nbsp;</span> <span class="label-icon" >Search</span></button>
+        </div>
       </div>
-      <p> </p>
+    </div>
+  </div>
 
-		<div class="row">
-			<div class="col-sm-12">
-				<p>Filter by :
+      <div class="row">
+        <div class="col-sm-12">
+          <p>Filter by :
           <label class="container">
             <li><button type="button" class="btn btn-default btn-xs btn-tag">All</button> <input type="checkbox" checked="checked"></li>
 
@@ -40,24 +46,19 @@ var API = {
 
           </label>
 
-				</p>
-			</div>
-		</div>
-        <div class="row text-center text-lg-left">
-
-
-            <div class="col-lg-3 col-md-4 col-xs-6 text-truncate" v-for="recipe in filtered_recipes">
-
-                <h3><a href="">${recipe.name}</a></h3>
-
-                <p>${recipe.description}</p>
-                <img class="img-fluid img-thumbnail" src="" alt="">
-            </div>
-
+          </p>
         </div>
-    </div>
-    <script src="{{=URL('static', 'js/default_index_vue.js')}}"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script src="{{=URL('static', 'js/jquery.min.js')}}" ></script>
-    <script src="{{=URL('static', 'js/bootstrap.bundle.js')}}"></script>
-</body>
+      </div>
+      <div class="row">
+        <div class="col-md-4" v-for="recipe in filtered_recipes">
+          <h2>${recipe.name}</h2>
+          <p>${recipe.description}<p/>
+          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+      </div>
+
+      <hr>
+
+</div> <!-- /container -->
+
+</main>

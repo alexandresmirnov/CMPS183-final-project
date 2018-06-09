@@ -5,22 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
 
-    <link href="{{=URL('static','css/custom.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{=URL('static','css/calendar.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{=URL('static','css/web2py.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{=URL('static','css/myapp.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{=URL('static','css/bootstrap.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{=URL('static','css/thumbnail_gallery.css')}}" rel="stylesheet" type="text/css"/>    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="{{=URL('static', 'font-awesome-4.6.3/css/font-awesome.min.css')}}">
-    {{include "web2py_ajax.html"}}
-  </head>
-  <body class="black">
-    {{if response.flash:}}
-    <div class="w2p_flash">
-      {{=response.flash}}
-    </div>
-    {{pass}}
 
+    <link href="{{=URL('static','css/custom.css')}}" rel="stylesheet" type="text/css"/>
+
+    {{include "web2py_ajax.html"}}
+
+
+    {{block head}}{{end}}
+  </head>
+
+<!--
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
         <a class="navbar-brand" href="#">Start Bootstrap</a>
@@ -33,29 +29,75 @@
         </div>
       </div>
     </nav>
+-->
 
 
+<body>
 
-    <main class="white">
-      {{include}}
-    </main>
-    <footer class="black">
-      <div class="silver center  social">
-        <a class="fa fa-facebook" href="https://www.facebook.com/sharer/sharer.php?u={url}"></a>
-        <a class="fa fa-twitter" href="https://twitter.com/home?status={url}"></a>
-        <a class="fa fa-google" href="https://plus.google.com/share?url={url}"></a>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+        <ul class=navbar-nav>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="{{=URL('default', 'user', args=['login'])}}">Log in</a>
+              <a class="dropdown-item" href="{{=URL('default', 'user', args=['register'])}}">Sign up</a>
+              <a class="dropdown-item" href="{{=URL('default', 'user', args=['request_reset_password'])}}">Lost password</a>
+            </div>
+          </li>
+
+        </ul>
       </div>
-      <div class="container  max900">
-        <div class="fill">
-          Copyright @ 2016
-        </div>
-      </div>
+    </nav>
+
+
+    {{include}}
+
+
+    <footer class="container">
+      <p>&copy; Company 2017-2018</p>
     </footer>
-  </body>
+
+
+</body>
+
+
+
+
+
+
+
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+  crossorigin="anonymous"></script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <script src="{{=URL('static','js/marked.min.js')}}"></script>
   <script src="{{=URL('static','js/vue.min.js')}}"></script>
-  {{block bottomjs}}{{end}}
-  <script>
-    jQuery('.social a').each(function(){var t=jQuery(this); t.attr('href',t.attr('href').replace('{url}',encodeURIComponent(window.location.href)));});
-  </script>
 </html>
