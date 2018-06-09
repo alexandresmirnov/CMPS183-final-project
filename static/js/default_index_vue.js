@@ -10,15 +10,7 @@ var app = function() {
 
     Vue.config.silent = false; // show all warnings
 
-    // Extends an array
-    self.extend = function(a, b) {
-        for (var i = 0; i < b.length; i++) {
-            a.push(b[i]);
-        }
-    };
-
-
-    self.func.data.getRecipes = function(){
+    self.func.getRecipes = function(){
         $.post(API.getRecipes,
             {},
             function(data){
@@ -34,7 +26,6 @@ var app = function() {
 
         self.vue.activeFilters[tag.name] = !self.vue.activeFilters[tag.name];
 
-        self.func.updateFilteredRecipes();
 
 
         filtersOn = false;
@@ -49,6 +40,35 @@ var app = function() {
         }
 
         self.vue.filtersOn = filtersOn;
+
+        self.func.updateFilteredRecipes();
+    };
+
+    self.func.searchRecipes = function(){
+
+      console.log("searchRecipes");
+
+      var matchingRecipes = [];
+      var searchString = self.vue.searchString.toLowerCase();
+
+      console.log("searchString: ", searchString);
+
+      for(var i = 0; i < self.vue.recipes.length; i++){
+        var recipe = self.vue.recipes[i];
+        var recipeText = recipe.name + " " + recipe.description.toLowerCase();
+
+        if(recipeText.indexOf(searchString) > -1){
+          matchingRecipes.push(recipe);
+        }
+
+      }
+
+      self.vue.searchedRecipes = matchingRecipes;
+
+      console.log("searcedRecipes: ", self.vue.searchedRecipes);
+
+      self.func.updateFilteredRecipes();
+
     };
 
 
@@ -56,30 +76,41 @@ var app = function() {
         // TODO: optimize this
         self.vue.filteredRecipes = [];
 
-        for(var i = 0; i < self.vue.recipes.length; i++){
-            var recipe = self.vue.recipes[i];
-            console.log("recipe: ", recipe);
+        var willFilterRecipes = self.vue.searchString != "" ? self.vue.searchedRecipes : self.vue.recipes;
 
-            var fitsFilters = true;
+        console.log("to filter: ", willFilterRecipes);
 
-            for(var filterName in self.vue.activeFilters){
-                if(self.vue.activeFilters.hasOwnProperty(filterName)){
-                  if(self.vue.activeFilters[filterName] && !recipe.tags.includes(filterName)){
-                    fitsFilters = false;
-                    break;
+        if(self.vue.filtersOn){
+          for(var i = 0; i < willFilterRecipes.length; i++){
+              var recipe = willFilterRecipes[i];
+
+              var fitsFilters = true;
+
+              for(var filterName in self.vue.activeFilters){
+                  if(self.vue.activeFilters.hasOwnProperty(filterName)){
+                    if(self.vue.activeFilters[filterName] && !recipe.tags.includes(filterName)){
+                      fitsFilters = false;
+                      break;
+                    }
                   }
-                }
-            }
+              }
 
-            if(fitsFilters){
-              self.vue.filteredRecipes.push(recipe);
-            }
+              if(fitsFilters){
+                self.vue.filteredRecipes.push(recipe);
+              }
+          }
+        }
+        else {
+          self.vue.filteredRecipes = willFilterRecipes;
         }
 
-        console.log(self.vue.filteredRecipes);
+
     };
 
     self.func.displayRecipes = function(){
+
+      console.log("displayRecipes");
+      console.log(this);
 
       console.log(this.$data.filtersOn);
 
@@ -99,6 +130,7 @@ var app = function() {
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
+            searchString: "",
             recipes: [
                 {
                     id: 1,
@@ -137,6 +169,7 @@ var app = function() {
                     tags: ["Vegetarian"],
                 },
             ],
+            searchedRecipes: [],
             filteredRecipes: [],
             filtersOn: false,
             activeFilters: {
@@ -165,7 +198,7 @@ var app = function() {
         methods: self.func
     });
 
-    //self.func.data.get_recipes();
+    //self.func.getRecipes();
     self.func.updateFilteredRecipes();
 
     return self;
