@@ -15,8 +15,8 @@ db.define_table('recipes',
 				Field('prep_time', 'integer'),
 				Field('cook_time', 'integer'),
 				Field('ingredients','list:string'),
-				Field('tags','list:reference tags.name'),
-				auth.signature
+				Field('tags','list:reference tags')
+
 )
 
 db.define_table('tags',
