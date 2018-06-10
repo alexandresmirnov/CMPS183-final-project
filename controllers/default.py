@@ -49,15 +49,15 @@ def get_tags_by_id(id):
 
 # Front-end entry points
 
-# list of recipes
 def aboutus():
     logger.info("aboutus")
     return dict(message = "TEST")
+
 def favoriterecipes():
     logger.info("favoriterecipes")
     return dict(message = "TEST")
 
-
+# list of recipes
 def index():
     logger.info("index")
     return dict(recipes = get_recipes())
@@ -80,12 +80,18 @@ def recipe():
 
     recipe_id = request.args(0)
 
+    logger.info("recipe_id: ")
+    logger.info(recipe_id)
+
     # get_recipe_by_id
     # populate ingredients
     # populate tags
     # create JSON
 
-    return dict(recipe = get_recipe_by_id(recipe_id), recipe_id = recipe_id)
+    return dict(
+        recipe = get_recipe_by_id(recipe_id),
+        recipe_id = recipe_id
+    )
 
 
 

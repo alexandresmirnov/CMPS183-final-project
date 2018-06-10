@@ -1,0 +1,307 @@
+{{extend 'layout.html'}} {{block head}}
+<script src="{{=URL('static', 'js/default_recipe.js')}}"></script>
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+  font: 400 15px/1.8 "Lato", sans-serif;
+  color: #777;
+}
+
+.bgimg-1, .bgimg-2, .bgimg-3 {
+  position: relative;
+  opacity: 0.65;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+.bgimg-1 {
+  background-image: url("{{=URL('static', 'images', args='fruit.jpg')}}");
+  min-height: 50%;
+}
+
+
+.caption {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+
+.caption span.border {
+  background-color: #111;
+  color: #fff;
+  padding: 18px;
+  font-size: 25px;
+  letter-spacing: 10px;
+}
+
+h3 {
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font: 20px "Lato", sans-serif;
+  color: #111;
+}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1024px) {
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+        background-attachment: scroll;
+    }
+}
+</style>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)}
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
+</style>
+<script>
+
+
+
+var API = {
+    getRecipe: "{{=URL('api', 'get_recipe')}}",
+};
+
+var RECIPE_ID = "{{=recipe_id}}";
+
+</script>
+{{end}}
+
+
+
+
+<main role="main" id="vue-div">
+  <div class="bgimg-1">
+    <div class="caption">
+      <span class="border">Recipes</span>
+    </div>
+  </div>
+
+  <p>hello </p>
+
+  <section id="recipe">
+   <div class="container">
+     <div class="row">
+       <!-- Title -->
+       <div class="col-12">
+         <h2>Barbecue Pork Ribs</h2>
+       </div>
+     </div>
+     <div class="row vertical-align">
+       <div class="col-12">
+         <!-- Picture -->
+         <div class="col-md-8 pull-left wow swing">
+           <img id="myImg" src="{{=URL('static', 'images', args='salad.jpg')}}" alt="Salad" width="300" height="200">
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById('myImg');
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+</script>
+
+         </div>
+         <!-- Info -->
+         <div class="col-md-4 pull-right wow lightSpeedIn">
+           <div class="recipe-info">
+             <h3>Info</h3>
+             <!-- Time -->
+             <div class="row">
+               <div class="col-2 text-center">
+                 <i class="fa fa-clock-o" aria-hidden="true"></i>
+               </div>
+               <div class="col-6">Time</div>
+               <div class="col-4">3:00 H</div>
+             </div>
+             <!-- Difficulty -->
+             <div class="row">
+               <div class="col-2 text-center">
+                 <i class="fa fa-area-chart" aria-hidden="true"></i>
+               </div>
+               <div class="col-6">Difficulty</div>
+               <div class="col-4">
+                 <i class="fa fa-star" aria-hidden="true"></i>
+                 <i class="fa fa-star" aria-hidden="true"></i>
+                 <i class="fa fa-star" aria-hidden="true"></i>
+               </div>
+             </div>
+             <!-- Serves -->
+             <div class="row">
+               <div class="col-2 text-center">
+                 <i class="fa fa-users" aria-hidden="true"></i>
+               </div>
+               <div class="col-6">Servings</div>
+               <div class="col-4">5</div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <!-- Ingredients -->
+     <div class="row wow slideInUp">
+       <div class="col-12">
+         <div class="recipe-ingredients">
+           <h3>Ingredients</h3>
+           <dl class="ingredients-list">
+             <dt>10</dt> <dd>country-style pork ribs</dd>
+             <dt>2</dt> <dd>tablespoons garlic powder</dd>
+             <dt>1</dt> <dd>tablespoon salt</dd>
+             <dt>1</dt> <dd>tablespoon pepper</dd>
+             <dt>2</dt> <dd>cups of your favorite barbecue sauce</dd>
+           </dl>
+         </div>
+       </div>
+     </div>
+     <!-- Directions -->
+     <div class="row wow slideInUp">
+       <div class="col-12">
+         <div class="recipe-directions">
+           <h3>Directions</h3>
+           <ol>
+             <li>Preheat oven to 325.</li>
+             <li>Place ribs meaty side up in an ungreased baking dish.</li>
+             <li>Sprinkle with garlic powder, salt, and pepper.</li>
+             <li>Cover with foil and bake for 2 hours.</li>
+             <li>Drain liquid.</li>
+             <li>Brush ribs generously with BBQ sauce.</li>
+             <li>Bake uncovered for an additional 30 minutes in oven or on the BBQ.</li>
+             <li>Add more sauce half-way through.</li>
+           </ol>
+         </div>
+       </div>
+     </div>
+     <!-- Back to recipes -->
+     <div class="row wow rollIn">
+       <div class="col-12 text-left">
+         <a class="nav-link" href="{{=URL('default', 'index')}}"> Go back to Recipes. <span class="sr-only">(current)</span></a>
+
+         </a>
+       </div>
+     </div>
+   </div>
+ </section>
+
+
+       <div class="col-md-6 col-sm-12 left">
+         <div class="footer-author">
+           Made with
+           <i class="fa fa-heart" aria-hidden="true"></i>
+           love by Food Dudes
+         </div>
+       </div>
+     </div>
+   </div>
+ </footer>
+</main>

@@ -12,20 +12,23 @@ def get_recipe():
 
     if request.vars.recipe_id == None:
         logger.info("error")
-    
+
     recipe_id = request.vars.recipe_id
-    
+
     q = (db.recipes.id == recipe_id)
     r = db(q).select().first()
     logger.info(r)
     tag_names = []
-    
+
+    if not r:
+        logger.info("no such recipe")
+
     if r.tags:
-        for tag in r.tags:
-            tname=(db(db.tags.id == tag).select().first())
-            logger.info(tname)
-            tag_names.append(tname.name)
-    
+        for tagid in r.tags:
+            tag = (db(db.tags.id == tagid).select().first())
+            if tag:
+                tag_names.append(tag.name)
+
     recipe = {
         'name': r.name,
         'image': r.image,
@@ -35,6 +38,6 @@ def get_recipe():
         'ingredients': r.ingredients,
         'tags': tag_names
     }
-    
+
     return response.json(dict(recipe=recipe))
-    
+
