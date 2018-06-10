@@ -1,12 +1,10 @@
 {{extend 'layout.html'}}
 
-<h2>
-{{=T('Sign Up') if request.args(0) == 'register' else T('Log In') if request.args(0) == 'login' else T(request.args(0).replace('_',' ').title())}}
-</h2>
+
 
 <div class="container">
-    <div class="row">
-        <div id="web2py_user_form" class="col-lg-6">
+    <div class="col-lg-6 offset-lg-4">
+        <div class="align-middle">
         {{
         if request.args(0)=='login':
             if not 'register' in auth.settings.actions_disabled:
@@ -18,6 +16,30 @@
         pass
         =form
         }}
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-lg-6 offset-lg-4">
+        <div class="align-middle">
+        {{
+        if request.args(0)=='login':
+            if not 'register' in auth.settings.actions_disabled:}}
+            <a
+                href="{{=URL(args='register', vars={'_next': request.vars._next})}}"
+                > Sign Up
+            </a>
+            {{pass}}
+            {{if not 'request_reset_password' in auth.settings.actions_disabled:}}
+                <a
+                href="{{=URL(args='request_reset_password')}}"
+                > Lost Password
+            </a>
+            {{pass}}
+        {{pass}}
+
+        
         </div>
     </div>
 </div>
