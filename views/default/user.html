@@ -30,6 +30,38 @@
         </p>
 
         {{pass}}
+
+        {{if request.args(0) == 'register':}}
+            <p>
+            <a class ="btn btn-primary"
+                href="{{=URL(args='login')}}"
+                > Login
+            </a>
+        </p>
+            <p>
+                <a class ="btn btn-primary"
+                href="{{=URL(args='request_reset_password')}}"
+                > Lost Password
+            </a>
+        </p>
+
+        {{pass}}  
+
+        {{if request.args(0) == 'request_reset_password':}}
+            <p>
+            <a class ="btn btn-primary"
+                href="{{=URL(args='login')}}"
+                > Login
+            </a>
+        </p>
+            <p>
+            <a class ="btn btn-primary"
+                href="{{=URL(args='register', vars={'_next': request.vars._next})}}"
+                > Sign Up
+            </a>
+        </p>
+
+        {{pass}}               
         
         </div>
     </div>
