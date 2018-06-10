@@ -1,26 +1,16 @@
 {{extend 'layout.html'}} {{block head}}
-<script src="{{=URL('static', 'js/vue.js')}}"></script>
+<script src="{{=URL('static', 'js/default_index.js')}}"></script>
+
 <script>
-var my_url = "{{=URL('api', 'my_method')}}";
+
+var API = {
+    getRecipe: "{{=URL('api', 'get_recipe')}}",
+};
+
 </script>
 {{end}}
 
+<main role="main" id="vue-div">
 
-<body>
 
-
-    <!-- Page Content -->
-    <div class="container" >
-
-            <h1 class="my-4 text-center text-lg-left">{{=recipe.name}}</h1>
-
-        <p>{{=recipe.description}}</p>
-        <img class="img-fluid img-thumbnail" src="{{=URL('default', 'download', args=recipe.image)}}" alt="">
-        
-        <h2 class = "text-lg-left"> Ingredients </h2>
-    </div>
-    <script src="{{=URL('static', 'js/default_index.js')}}"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script src="{{=URL('static', 'js/jquery.min.js')}}" ></script>
-    <script src="{{=URL('static', 'js/bootstrap.bundle.js')}}"></script>
-</body>
+</main>
