@@ -68,7 +68,7 @@ var API = {
 					<div class="card-body">
 						<h3 class="card-title">${recipe.name}</h2>
 						<p class="card-text">${recipe.description}<p/>
-						<a class="card-link" href="#">View recipe</a>
+						<a class="card-link" v-bind:href='"/default/recipe/"+recipe.id'>View recipe</a>
 					</div>
 					<div class="card-footer">
 						<small class="text-muted">Tags:</small>
