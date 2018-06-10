@@ -67,3 +67,11 @@ def get_recipe():
 
     return response.json(dict(recipe=recipe))
 
+
+def get_tags():
+    logger.info("get_recipes")
+
+    q = (db.tags.id > 0)
+    tags = db(q).select()
+
+    return response.json(dict(tags=tags))

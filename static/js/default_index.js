@@ -51,6 +51,18 @@ var app = function() {
 
     */
 
+    // load in tags from server
+    self.func.getTags = function(){
+        console.log("getRecipes");
+        $.post(API.getTags,
+            {},
+            function(data){
+                console.log("tags data: ", data);
+                self.vue.tags = data.tags;
+            }
+        );
+    };
+
     // gets all recipes from getRecipes API endpoint
     self.func.getRecipes = function(){
         console.log("getRecipes");
@@ -173,6 +185,13 @@ var app = function() {
         return this.$data.activeFilters[tagName];
     };
 
+    // returns true if recipeID inside self.vue.favoriteRecipes
+    // which will be populated once user favorites are implemented
+    self.func.isFavoriteRecipe = function(recipeID){
+      console.log("is favorite recipe:", recipeID);
+      return this.$data.favoriteRecipes.includes(recipeID);
+    };
+
 
     // Complete as needed.
     self.vue = new Vue({
@@ -241,13 +260,15 @@ var app = function() {
                     name: "Vegan",
                 },
             ],
+            favoriteRecipes: [1, 3, 5],
         },
         methods: self.func
     });
 
+    self.func.getTags();
     self.func.getRecipes();
 
-    self.func.updateFilteredRecipes();
+    // not calling self.func.updateFilteredRecipes() b/c getRecipes() already does
 
     return self;
 };
