@@ -15,17 +15,21 @@
         <div class="align-middle">
         {{
         =form}}
-            <a
+        {{if request.args(0) == 'login':}}
+            <p>
+            <a class ="btn btn-primary"
                 href="{{=URL(args='register', vars={'_next': request.vars._next})}}"
                 > Sign Up
             </a>
-
-                <a
+        </p>
+            <p>
+                <a class ="btn btn-primary"
                 href="{{=URL(args='request_reset_password')}}"
                 > Lost Password
             </a>
+        </p>
 
-
+        {{pass}}
         
         </div>
     </div>
