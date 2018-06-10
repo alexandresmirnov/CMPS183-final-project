@@ -18,7 +18,7 @@ var API = {
   <div class="container">
     <h1 class="display-3">The Food Dude</h1>
     <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+    <p><a class="btn btn-primary btn-lg" href="http://127.0.0.1:8000/finalproject/default/AboutUs#" role="button">About Us &raquo;</a></p>
   </div>
 </div>
 
@@ -50,7 +50,7 @@ var API = {
 				<div class="list-group list-group-flush">
         <button v-for="(tag, index) in tags" type="button" v-bind:class="{'active': isActiveFilter(tag.name)}" class="list-group-item list-group-item-action" v-on:click="toggleTagByName(tag.name)">${tag.name}</button>
 				</div>
-			</div> 
+			</div>
 
       <!--
       <div class="list-group mt-4">
@@ -72,9 +72,9 @@ var API = {
 					</div>
 					<div class="card-footer">
 						<small class="text-muted">Tags:</small>
-						<button 
-							v-for="tagName in recipe.tags" 
-							type="button" 
+						<button
+							v-for="tagName in recipe.tags"
+							type="button"
 							class="btn btn-light btn-sm mr-2"
 							v-bind:class="{
 								'active': isActiveFilter(tagName)

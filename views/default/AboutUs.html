@@ -1,0 +1,16 @@
+{{extend 'layout.html'}} {{block head}}
+<script src="{{=URL('static', 'js/default_index.js')}}"></script>
+
+<script>
+
+var API = {
+    getRecipe: "{{=URL('api', 'get_recipe')}}",
+};
+
+</script>
+{{end}}
+
+<main role="main" id="vue-div">
+
+
+</main>
