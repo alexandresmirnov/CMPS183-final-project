@@ -1,13 +1,6 @@
 {{extend 'layout.html'}}
 
-<h2 class="text-center align-middle font-weight-light my-sm-4">
-{{=T('Sign Up') 
-    if request.args(0) == 'register' 
-    else T('Log In') 
-    if request.args(0) == 'login' 
-    else T(request.args(0).replace('_',' ').title())
-}}
-</h2>
+
 
 <div class="container">
     <div class="col-lg-6 offset-lg-4">
@@ -33,16 +26,16 @@
         {{
         if request.args(0)=='login':
             if not 'register' in auth.settings.actions_disabled:}}
-            <button
-                v-click:href="{{=URL(args='register', vars={'_next': request.vars._next})}}"
+            <a
+                href="{{=URL(args='register', vars={'_next': request.vars._next})}}"
                 > Sign Up
-            </button>
+            </a>
             {{pass}}
             {{if not 'request_reset_password' in auth.settings.actions_disabled:}}
-                <button
-                v-click:href="{{=URL(args='request_reset_password')}}"
+                <a
+                href="{{=URL(args='request_reset_password')}}"
                 > Lost Password
-            </button>
+            </a>
             {{pass}}
         {{pass}}
 
