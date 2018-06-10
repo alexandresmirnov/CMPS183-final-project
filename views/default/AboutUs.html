@@ -1,30 +1,5 @@
 {{extend 'layout.html'}} {{block head}}
 <script src="{{=URL('static', 'js/default_index.js')}}"></script>
-
-<script>
-
-var API = {
-    getRecipes: "{{=URL('api', 'get_recipes')}}",
-    getRecipe: "{{=URL('api', 'get_recipe')}}",
-};
-
-</script>
-{{end}}
-
-<main role="main" id="vue-div">
-
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
-  <div class="container">
-    <h1 class="display-3">The Food Dude</h1>
-    <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-
-  </div>
-</div>
-
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body, html {
   height: 100%;
@@ -43,17 +18,17 @@ body, html {
 
 }
 .bgimg-1 {
-  background-image: url("img_parallax.jpg");
+  background-image: url("{{=URL('static', 'images', args='fruit.jpg')}}");
   min-height: 100%;
 }
 
 .bgimg-2 {
-  background-image: url("img_parallax2.jpg");
+  background-image: url("{{=URL('static', 'images', args='salad.jpg')}}");
   min-height: 400px;
 }
 
 .bgimg-3 {
-  background-image: url("img_parallax3.jpg");
+  background-image: url("{{=URL('static', 'images', args='food.jpg')}}");
   min-height: 400px;
 }
 
@@ -88,8 +63,31 @@ h3 {
     }
 }
 </style>
-</head>
-<body>
+<script>
+
+var API = {
+    getRecipes: "{{=URL('api', 'get_recipes')}}",
+    getRecipe: "{{=URL('api', 'get_recipe')}}",
+};
+
+</script>
+{{end}}
+
+<main role="main" id="vue-div">
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="display-3">The Food Dude</h1>
+    <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+
+  </div>
+</div>
+
+
+
+
+
 
 <div class="bgimg-1">
   <div class="caption">
@@ -132,8 +130,7 @@ h3 {
   </div>
 </div>
 
-</body>
-</html>
+
 
 
 </main>
