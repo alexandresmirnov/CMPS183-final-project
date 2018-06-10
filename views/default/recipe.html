@@ -19,32 +19,17 @@ var RECIPE_ID = "{{=recipe_id}}";
   <div class="card mt-4">
     <img class="card-img-top" src="{{=URL('static', 'images', args='fruit.jpg')}}">
     <div class="card-body">
-      <h3 class="card-title">Recipe name</h3>
-      <p class="card-text">Example text, blah blah blah.</p>
-      <small class="text-muted">Prep time: 20 minutes, Cook time: 5 minutes</small>
+      <h3 class="card-title">${recipe.name}</h3>
+      <p class="card-text">${recipe.description}.</p>
+      <small class="text-muted">Prep time: ${recipe.prep_time} minutes, Cook time: ${recipe.cook_time} minutes</small>
     </div>
-    <div class="card-footer">
+    <div class="card-footer" v-if="recipe.tags != null && recipe.tags.length > 0">
       <div class="float-left">
         <small class="text-muted">Tags:</small>
-        <button class="btn btn-light btn-sm active ml-2">
-          Vegan
-        </button>
-        <button class="btn btn-light btn-sm active ml-2">
-          Vegetarian
+        <button v-for="tag in recipe.tags" class="btn btn-light btn-sm active ml-2">
+          ${tag}
         </button>
       </div>
-      <!--
-      <div class="float-right">
-        <button class="btn btn-light btn-sm active ml-2">
-          Cook 
-          <span class="badge badge-dark">20</span>
-        </button>
-        <button class="btn btn-light btn-sm active ml-2">
-          Prep 
-          <span class="badge badge-dark">5</span>
-        </button>
-      </div>
-      -->
     </div>
   </div>
 
@@ -53,9 +38,7 @@ var RECIPE_ID = "{{=recipe_id}}";
       Ingredients
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">Cras justo odio</li>
-      <li class="list-group-item">Dapibus ac facilisis in</li>
-      <li class="list-group-item">Vestibulum at eros</li>
+      <li v-for="ingredient in recipe.ingredients" class="list-group-item">${ingredient}</li>
     </ul>
   </div>
 
@@ -64,9 +47,7 @@ var RECIPE_ID = "{{=recipe_id}}";
       Instructions
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">Cras justo odio</li>
-      <li class="list-group-item">Dapibus ac facilisis in</li>
-      <li class="list-group-item">Vestibulum at eros</li>
+      <li v-for="(instruction, index) in recipe.instr" class="list-group-item">${index + 1}. ${instruction}</li>
     </ul>
   </div>
 

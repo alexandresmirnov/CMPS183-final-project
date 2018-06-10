@@ -30,8 +30,10 @@ def get_recipe():
                 tag_names.append(tag.name)
 
     recipe = {
+        'id': r.id,
         'name': r.name,
         'image': r.image,
+        'description': r.description,
         'instr': r.instr,
         'prep_time': r.prep_time,
         'cook_time': r.cook_time,
