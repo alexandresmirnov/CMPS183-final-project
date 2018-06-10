@@ -11,40 +11,32 @@ db.define_table('recipes',
 				Field('name', 'text', required = True),
 				Field('image', 'upload'),
 				Field('description', 'text'),
-				Field('instr', 'text'),
+				Field('instr', 'list:string'),
 				Field('prep_time', 'integer'),
 				Field('cook_time', 'integer'),
-				Field('ingredient1','text'),
-				Field('amount1','text'), 
-				Field('ingredient2','text'),
-				Field('amount2','text'), 
-				Field('ingredient3','text'),
-				Field('amount3','text'), 
-				Field('tags','list:reference tag')
+				Field('ingredients','list:string'),
+				Field('tags','list:reference tags.name'),
+				auth.signature
 )
 
-db.define_table('ingredients',
-				Field('recipe_id', 'reference recipes'),
-
-
-)
-
-db.define_table('tag',
-				Field('name'),
+db.define_table('tags',
+				Field('name', 'string'),
 				Field('category1'),
 				Field('category2')
 
 )
 
-
 db.define_table('reviews',
 				Field('recipe_id', 'reference recipes'),
-				Field('written_by', 'reference auth_user'),
+				Field('written_by', 'reference auth_user', default=auth.user_id),
 				Field('rating','integer'),
 				Field('title','text'),
 				Field('body','text')
 )
 
+db.define_table('users',
+                
+)
 
 
 # after defining tables, uncomment below to enable auditing
