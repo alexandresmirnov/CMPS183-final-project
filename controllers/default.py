@@ -53,6 +53,10 @@ def get_tags_by_id(id):
 def aboutus():
     logger.info("aboutus")
     return dict(message = "TEST")
+def favoriterecipes():
+    logger.info("favoriterecipes")
+    return dict(message = "TEST")
+
 
 def index():
     logger.info("index")

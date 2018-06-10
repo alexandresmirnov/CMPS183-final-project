@@ -1,5 +1,5 @@
 {{extend 'layout.html'}} {{block head}}
-<script src="{{=URL('static', 'js/default_recipe.js')}}"></script>
+<script src="{{=URL('static', 'js/default_index.js')}}"></script>
 <style>
 body, html {
   height: 100%;
@@ -19,9 +19,18 @@ body, html {
 }
 .bgimg-1 {
   background-image: url("{{=URL('static', 'images', args='fruit.jpg')}}");
-  min-height: 50%;
+  min-height: 100%;
 }
 
+.bgimg-2 {
+  background-image: url("{{=URL('static', 'images', args='salad.jpg')}}");
+  min-height: 200px;
+}
+
+.bgimg-3 {
+  background-image: url("{{=URL('static', 'images', args='food.jpg')}}");
+  min-height: 400px;
+}
 
 .caption {
   position: absolute;
@@ -54,24 +63,29 @@ h3 {
     }
 }
 </style>
-
 <script>
 
 var API = {
+    getRecipes: "{{=URL('api', 'get_recipes')}}",
     getRecipe: "{{=URL('api', 'get_recipe')}}",
 };
-
-var RECIPE_ID = "{{=recipe_id}}";
 
 </script>
 {{end}}
 
 <main role="main" id="vue-div">
-  <div class="bgimg-1">
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+
+<main role="main" id="vue-div">
+  <div class="bgimg-2">
     <div class="caption">
-      <span class="border">Recipes</span>
+      <span class="border">Favorite Recipes</span>
     </div>
   </div>
+
+
+</main>
 
 
 </main>
