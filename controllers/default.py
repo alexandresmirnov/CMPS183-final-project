@@ -50,6 +50,10 @@ def get_tags_by_id(id):
 # Front-end entry points
 
 # list of recipes
+def aboutus():
+    logger.info("aboutus")
+    return dict(message = "TEST")
+
 def index():
     logger.info("index")
     return dict(recipes = get_recipes())
@@ -65,8 +69,8 @@ def recipe():
     logger.info("recipe")
     logger.info(request.args)
 
-    recipe_id = 0 
-    
+    recipe_id = 0
+
     if request.args(0) is None:
         redirect(URL('default', 'index'))
 
