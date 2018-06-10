@@ -21,7 +21,7 @@ var DOWNLOADS_DIR = "{{=URL('default', 'download')}}";
 <div class="container">
 
   <div class="card mt-4">
-    <img class="card-img-top recipe-image" v-bind:src='DOWNLOADS_DIR + "/" + recipe.image'>
+    <img v-if="recipe.image != ''" class="card-img-top recipe-image" v-bind:src='DOWNLOADS_DIR + "/" + recipe.image'>
     <div class="card-body">
       <h3 class="card-title">${recipe.name}</h3>
       <p class="card-text">${recipe.description}.</p>

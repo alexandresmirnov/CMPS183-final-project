@@ -58,7 +58,8 @@ var app = function() {
             {},
             function(data){
                 console.log("data: ", data);
-                //self.vue.allRecipes = data.recipes;
+                self.vue.allRecipes = data.recipes;
+                self.func.updateFilteredRecipes();
             }
         );
     };
@@ -245,6 +246,7 @@ var app = function() {
     });
 
     self.func.getRecipes();
+
     self.func.updateFilteredRecipes();
 
     return self;

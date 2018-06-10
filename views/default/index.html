@@ -8,6 +8,8 @@ var API = {
     getRecipe: "{{=URL('api', 'get_recipe')}}",
 };
 
+var DOWNLOADS_DIR = "{{=URL('default', 'download')}}";
+
 </script>
 {{end}}
 
@@ -69,12 +71,13 @@ var API = {
 
 			<div class="card-columns" id="recipe-card-columns">
 				<div class="card" v-for="recipe in filteredRecipes">
+          <img v-if="recipe.image != ''" class="card-img-top" v-bind:src='DOWNLOADS_DIR + "/" + recipe.image'>
 					<div class="card-body">
 						<h3 class="card-title">${recipe.name}</h2>
 						<p class="card-text">${recipe.description}<p/>
 						<a class="card-link" v-bind:href='"/finalproject/default/recipe/"+recipe.id'>View recipe</a>
 					</div>
-					<div class="card-footer">
+          <div class="card-footer" v-if="recipe.tags.length > 0">
 						<small class="text-muted">Tags:</small>
 						<button
 							v-for="tagName in recipe.tags"

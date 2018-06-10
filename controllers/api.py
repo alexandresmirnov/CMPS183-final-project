@@ -4,7 +4,31 @@ def get_recipes():
     q = (db.recipes.id > 0)
     recipes = db(q).select()
 
-    return response.json(dict(recipes = recipes))
+    response_recipes = []
+
+    for r in recipes:
+        tag_names = []
+        if r.tags:
+            for tagid in r.tags:
+                tag = (db(db.tags.id == tagid).select().first())
+                if tag:
+                    tag_names.append(tag.name)
+
+        logger.info(tag_names)
+
+        response_recipes.append(dict(
+            id = r.id,
+            name = r.name,
+            image = r.image,
+            description = r.description,
+            instr = r.instr,
+            prep_time = r.prep_time,
+            cook_time = r.cook_time,
+            ingredients = r.ingredients,
+            tags = tag_names
+        ))
+
+    return response.json(dict(recipes = response_recipes))
 
 
 def get_recipe():
