@@ -77,7 +77,7 @@ def recipe():
     # populate tags
     # create JSON
 
-    return dict(recipe = get_recipe_by_id(recipe_id))
+    return dict(recipe = get_recipe_by_id(recipe_id), recipe_id = recipe_id)
 
 
 

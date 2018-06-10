@@ -2,11 +2,25 @@
 
 var app = function() {
 
-    var self = {};
+    var self = {
+        func: {}
+    };
 
     Vue.config.silent = false; // show all warnings
 
-    var self.func = {};
+    self.func.getRecipe = function(){
+        console.log("getRecipe");
+
+        $.post(API.getRecipe,
+            {
+                recipe_id: RECIPE_ID, // constant defined in recipe.html
+            },
+            function(data){
+                console.log("data: ", data);
+                self.vue.recipe = data.recipe;
+            }
+        );
+    };
 
 
     // Complete as needed.
@@ -15,10 +29,13 @@ var app = function() {
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
+            recipe: {},
         },
         methods: self.func
     });
 
+
+    self.func.getRecipe();
 
     return self;
 };

@@ -1,11 +1,13 @@
 {{extend 'layout.html'}} {{block head}}
-<script src="{{=URL('static', 'js/default_index.js')}}"></script>
+<script src="{{=URL('static', 'js/default_recipe.js')}}"></script>
 
 <script>
 
 var API = {
     getRecipe: "{{=URL('api', 'get_recipe')}}",
 };
+
+var RECIPE_ID = "{{=recipe_id}}";
 
 </script>
 {{end}}
