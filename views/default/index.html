@@ -16,9 +16,13 @@ var API = {
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
   <div class="container">
-    <h1 class="display-3">The Food Dude</h1>
-    <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-    <p><a class="btn btn-primary btn-lg" href="http://127.0.0.1:8000/finalproject/default/aboutus#" role="button">About Us &raquo;</a></p>
+    <main role="main" id="vue-div">
+
+        <h1 class="display-3">The Food Dude</h1>
+          <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+      
+
+    <p><a class="btn btn-primary btn-lg" href="{{=URL('default', 'aboutus')}}" role="button">About Us &raquo;</a></p>
   </div>
 </div>
 
