@@ -119,8 +119,6 @@ var app = function() {
 
         var willFilterRecipes = self.vue.searchString != "" ? self.vue.searchedRecipes : self.vue.allRecipes;
 
-        console.log("to filter: ", willFilterRecipes);
-
         if(self.vue.filtersOn){
           for(var i = 0; i < willFilterRecipes.length; i++){
               var recipe = willFilterRecipes[i];
@@ -180,16 +178,28 @@ var app = function() {
         self.func.toggleTagByName(tag.name);
     };
 
+    self.func.toggleTagFavorite = function(tag){
+      tag.favorite = !tag.favorite;
+
+      event.stopPropagation();
+    };
+
+
+    self.func.toggleRecipeFavorite = function(recipe){
+      recipe.favorite = !recipe.favorite;
+    };
+
     // helper function, checks is filter is active
     self.func.isActiveFilter = function(tagName){
         return this.$data.activeFilters[tagName];
     };
 
-    // returns true if recipeID inside self.vue.favoriteRecipes
-    // which will be populated once user favorites are implemented
-    self.func.isFavoriteRecipe = function(recipeID){
-      console.log("is favorite recipe:", recipeID);
-      return this.$data.favoriteRecipes.includes(recipeID);
+    self.func.isFavoriteTag = function(tag){
+      return tag.favorite;
+    };
+
+    self.func.isFavoriteRecipe = function(recipe){
+      return recipe.favorite;
     };
 
 
@@ -206,36 +216,43 @@ var app = function() {
                     name: "VV",
                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ornare, nunc eget malesuada eleifend, nibh sapien porta eros, at vehicula odio quam ut nisl. Nam ex nisl, varius vehicula tortor ac, pellentesque pharetra dolor. Duis posuere, nisi a porttitor maximus, dolor lorem suscipit risus, eu mollis sem eros nec massa. Donec a faucibus arcu. Sed lacinia pretium est, ac volutpat urna consectetur vel. Curabitur ullamcorper bibendum erat, accumsan rhoncus elit semper ac. Fusce sit amet enim id dui porta semper porttitor id mi.",
                     tags: ["Vegetarian", "Vegan"],
+                    favorite: true,
                 },
                 {
                     id: 2,
                     name: "tofu (keto,vegan)",
                     description: "Maecenas lobortis varius augue, ac tincidunt lacus semper maximus. Integer tincidunt gravida leo, quis blandit odio venenatis vel. Morbi ac urna at dui pretium iaculis.",
                     tags: ["Keto", "Vegan"],
+                    favorite: false,
                 },
                 {
                     id: 3,
                     name: "just veg",
                     description: "Suspendisse potenti. Nulla sollicitudin massa nec fringilla ullamcorper. Vestibulum urna mi, vulputate non pellentesque quis, mollis id justo. Etiam consectetur arcu in pretium efficitur. Phasellus tincidunt magna non ex imperdiet auctor. Nam hendrerit dolor tellus, bibendum tristique tellus semper ac. Nulla interdum magna ligula, ut cursus mauris ullamcorper id. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris commodo libero metus, interdum convallis velit pharetra et. In hendrerit lacus id auctor interdum. In nec eros at tortor pharetra luctus eu vel nibh. Donec eget rhoncus quam. Praesent et augue at diam porttitor iaculis. Donec sit amet justo nisi.",
                     tags: ["Vegetarian"],
+                    favorite: true,
                 },
                 {
                     id: 4,
                     name: "just veg",
                     description: "Aliquam auctor nunc at leo pharetra, vitae auctor arcu tempor. Sed porta magna nec mollis pharetra. Vivamus mollis augue ut arcu luctus scelerisque. Proin porttitor elit nisi, eget facilisis mi mollis nec. Proin posuere pulvinar porttitor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
                     tags: ["Vegetarian"],
+                    favorite: false,
                 },
                 {
                     id: 5,
                     name: "just veg",
                     description: "Aliquam blandit erat dui, nec scelerisque magna lobortis in. Morbi lobortis nisi orci. Vestibulum scelerisque velit quam, vitae mattis lorem mattis vel. Maecenas enim lacus, molestie quis purus vel, auctor malesuada turpis. Pellentesque vulputate, enim vel pulvinar pharetra, velit est gravida velit, ut ultrices dolor quam non risus. Nullam gravida fringilla orci et pretium. Donec id massa turpis. Curabitur at suscipit diam.",
                     tags: ["Vegetarian"],
+                    favorite: true,
                 },
                 {
                     id: 6,
                     name: "just veg",
                     description: "Aliquam blandit erat dui, nec scelerisque magna lobortis in. Morbi lobortis nisi orci. Vestibulum scelerisque velit quam, vitae mattis lorem mattis vel. Maecenas enim lacus, molestie quis purus vel, auctor malesuada turpis. Pellentesque vulputate, enim vel pulvinar pharetra, velit est gravida velit, ut ultrices dolor quam non risus. Nullam gravida fringilla orci et pretium. Donec id massa turpis. Curabitur at suscipit diam.",
                     tags: ["Vegetarian"],
+                    favorite: false,
+
                 },
             ],
             searchedRecipes: [],
@@ -250,25 +267,29 @@ var app = function() {
                 {
                     id: 1,
                     name: "Vegetarian",
+                    favorite: true,
                 },
                 {
                     id: 2,
                     name: "Keto",
+                    favorite: false,
                 },
                 {
                     id: 3,
                     name: "Vegan",
+                    favorite: true,
                 },
             ],
-            favoriteRecipes: [1, 3, 5],
         },
         methods: self.func
     });
 
-    self.func.getTags();
-    self.func.getRecipes();
+    //self.func.getTags();
+    //self.func.getRecipes();
 
     // not calling self.func.updateFilteredRecipes() b/c getRecipes() already does
+
+    self.func.updateFilteredRecipes();
 
     return self;
 };

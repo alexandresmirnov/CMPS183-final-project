@@ -55,7 +55,30 @@ var DOWNLOADS_DIR = "{{=URL('default', 'download')}}";
 					Tags:
 				</div>
 				<div class="list-group list-group-flush">
-          <button v-for="(tag, index) in tags" type="button" v-bind:class="{'active': isActiveFilter(tag.name)}" class="list-group-item list-group-item-action" v-on:click="toggleTagByName(tag.name)">${tag.name}</button>
+          <button 
+            v-for="(tag, index) in tags" 
+            v-bind:class="{'active': isActiveFilter(tag.name)}" 
+            v-on:click="toggleTagByName(tag.name);"
+            class="list-group-item list-group-item-action tag-button" 
+          >
+            ${tag.name} 
+              
+            <div 
+              class="btn btn-sm btn-primary tag-heart float-right"
+              v-bind:class="{
+                'invisible': !isActiveFilter(tag.name),
+              }"
+              v-on:click="toggleTagFavorite(tag)"
+            >
+              <i 
+                class="fa-heart"
+                v-bind:class="{
+                  'far': isFavoriteTag(tag),
+                  'fa': !isFavoriteTag(tag)
+                }"
+              ></i>
+            </div>
+          </button>
 				</div>
 			</div>
 
@@ -71,8 +94,8 @@ var DOWNLOADS_DIR = "{{=URL('default', 'download')}}";
     <div class="col-sm-9 h-100">
 
 			<div class="card-columns" id="recipe-card-columns">
-				<div class="card" v-for="recipe in filteredRecipes">
-          <img v-if="recipe.image != ''" class="card-img-top" v-bind:src='DOWNLOADS_DIR + "/" + recipe.image'>
+				<div class="card" v-for="(recipe, index) in filteredRecipes">
+          <img v-if="recipe.image != '' && recipe.image != null" class="card-img-top" v-bind:src='DOWNLOADS_DIR + "/" + recipe.image'>
 					<div class="card-body">
 						<h3 class="card-title">${recipe.name}</h2>
 						<p class="card-text">${recipe.description}<p/>
@@ -91,12 +114,15 @@ var DOWNLOADS_DIR = "{{=URL('default', 'download')}}";
             >
               ${tagName}
             </button>
-            <button class="btn btn-light float-right">
+            <button 
+              class="btn btn-light float-right"
+              v-on:click="toggleRecipeFavorite(recipe)"
+            >
               <i 
                 class="fa-heart" 
                 v-bind:class="{
-                  'far': !isFavoriteRecipe(recipe.id), 
-                  'fas': isFavoriteRecipe(recipe.id)
+                  'far': !isFavoriteRecipe(recipe), 
+                  'fas': isFavoriteRecipe(recipe)
                 }"
               ></i>
             </button>
