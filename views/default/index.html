@@ -102,7 +102,7 @@ var DOWNLOADS_DIR = "{{=URL('default', 'download')}}";
               v-bind:class="{
                 'active': isActiveTag(tag.category, tag.name)
               }"
-              v-on:click="toggleTagByName(tag.name)"
+              v-on:click="toggleTag(tag.category, tag.name)"
             >
               ${tag.name}
             </button>

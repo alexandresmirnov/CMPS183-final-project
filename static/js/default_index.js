@@ -198,8 +198,8 @@ var app = function() {
     };
 
 
-    self.func.toggleTag = function(filterName, tagName){
-      self.vue.filters[filterName][tagName].active = !self.vue.filters[filterName][tagName].active;
+    self.func.toggleTag = function(categoryName, tagName){
+      self.vue.filters[categoryName][tagName].active = !self.vue.filters[categoryName][tagName].active;
 
       filtersOn = false;
 
@@ -346,11 +346,6 @@ var app = function() {
             searchedRecipes: [],
             filteredRecipes: [],
             filtersOn: false,
-            activeFilters: {
-                "Vegetarian": false,
-                "Keto": false,
-                "Vegan": false,
-            },
             filters: {},
             /*
 
