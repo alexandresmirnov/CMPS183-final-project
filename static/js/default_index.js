@@ -108,6 +108,18 @@ var app = function() {
     };
 
 
+
+    // iterate through array of tag objects of form {name: "name", category: "category"}, true if present
+    self.func.tagsContainTagName = function(tags, tagName){
+
+      for(var i = 0; i < tags.length; i++){
+        var tag = tags[i];
+        if(tag.name == tagName) return true;
+      }
+
+      return false;
+    }
+
     // finds matches between filters and recipes such that recipe tags are a superset of the active tags
     // note that there is no "active tags array"; it's an object that we iterate through here to create
     // a conceptual array, i.e. active tags does not look like: ["Vegan", "Keto"], but rather like
@@ -120,23 +132,36 @@ var app = function() {
         var willFilterRecipes = self.vue.searchString != "" ? self.vue.searchedRecipes : self.vue.allRecipes;
 
         if(self.vue.filtersOn){
+
           for(var i = 0; i < willFilterRecipes.length; i++){
-              var recipe = willFilterRecipes[i];
+            var recipe = willFilterRecipes[i];
 
-              var fitsFilters = true;
+            var fitsFilters = true;
 
-              for(var filterName in self.vue.activeFilters){
-                  if(self.vue.activeFilters.hasOwnProperty(filterName)){
-                    if(self.vue.activeFilters[filterName] && !recipe.tags.includes(filterName)){
-                      fitsFilters = false;
-                      break;
+            for(var categoryName in self.vue.filters){
+                if(self.vue.filters.hasOwnProperty(categoryName)){
+
+                  var category = self.vue.filters[categoryName];
+
+                  for(var tagName in category){
+                    if(category.hasOwnProperty(tagName)){
+
+                      var tag = category[tagName];
+
+                      if(tag.active && !self.func.tagsContainTagName(recipe.tags, tagName)){
+                        fitsFilters = false;
+                        break;
+                      }
+
                     }
                   }
-              }
 
-              if(fitsFilters){
-                self.vue.filteredRecipes.push(recipe);
-              }
+                }
+            }
+
+            if(fitsFilters){
+              self.vue.filteredRecipes.push(recipe);
+            }
           }
         }
         else {
@@ -147,39 +172,68 @@ var app = function() {
     };
 
 
+    // goes through tag[] and creates filter obj that represents side menu
+    self.func.generateFilters = function(){
+      var filters = {};
+      var tags = self.vue.tags;
 
-    // same as toggleTag, but done by tag name
-    // toggles whether or not a tag is considered active in activeFilters
-    self.func.toggleTagByName = function(tagName){
+      var tag;
+      var category;
+      for(var i = 0; i < tags.length; i++){
+        tag = tags[i];
+        category = tag.category;
 
-      self.vue.activeFilters[tagName] = !self.vue.activeFilters[tagName];
+        if(filters[category] == null){
+          filters[category] = {};
+        }
+        filters[category][tag.name] = {
+          active: false,
+          favorite: tag.favorite
+        }
+      }
+
+      console.log("filters:",filters);
+      self.vue.filters = filters;
+
+    };
+
+
+    self.func.toggleTag = function(filterName, tagName){
+      self.vue.filters[filterName][tagName].active = !self.vue.filters[filterName][tagName].active;
 
       filtersOn = false;
 
-      for(var tagName in self.vue.activeFilters){
-        if(self.vue.activeFilters.hasOwnProperty(tagName)){
-          if(self.vue.activeFilters[tagName]){
-            filtersOn = true;
-            break;
+      for(var categoryName in self.vue.filters){
+        if(self.vue.filters.hasOwnProperty(categoryName)){
+
+          var category = self.vue.filters[categoryName];
+
+          for(var tagName in category){
+            if(category.hasOwnProperty(tagName)){
+
+              if(category[tagName].active){
+                filtersOn = true;
+                break;
+              }
+
+            }
           }
+
         }
       }
 
       self.vue.filtersOn = filtersOn;
-
       self.func.updateFilteredRecipes();
 
     };
 
-    // toggle by index inside tags[] array
-    self.func.toggleTagByindex = function(tagIndex){
-        var tag = self.vue.tags[tagIndex];
 
-        self.func.toggleTagByName(tag.name);
+    self.func.isActiveTag = function(categoryName, tagName){
+      return this.$data.filters[categoryName][tagName].active;
     };
 
-    self.func.toggleTagFavorite = function(tag){
-      tag.favorite = !tag.favorite;
+    self.func.toggleTagFavorite = function(categoryName, tagName){
+      self.vue.filters[categoryName][tagName].favorite = !self.vue.filters[categoryName][tagName].favorite;
 
       event.stopPropagation();
     };
@@ -189,14 +243,6 @@ var app = function() {
       recipe.favorite = !recipe.favorite;
     };
 
-    // helper function, checks is filter is active
-    self.func.isActiveFilter = function(tagName){
-        return this.$data.activeFilters[tagName];
-    };
-
-    self.func.isFavoriteTag = function(tag){
-      return tag.favorite;
-    };
 
     self.func.isFavoriteRecipe = function(recipe){
       return recipe.favorite;
@@ -215,42 +261,84 @@ var app = function() {
                     id: 1,
                     name: "VV",
                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ornare, nunc eget malesuada eleifend, nibh sapien porta eros, at vehicula odio quam ut nisl. Nam ex nisl, varius vehicula tortor ac, pellentesque pharetra dolor. Duis posuere, nisi a porttitor maximus, dolor lorem suscipit risus, eu mollis sem eros nec massa. Donec a faucibus arcu. Sed lacinia pretium est, ac volutpat urna consectetur vel. Curabitur ullamcorper bibendum erat, accumsan rhoncus elit semper ac. Fusce sit amet enim id dui porta semper porttitor id mi.",
-                    tags: ["Vegetarian", "Vegan"],
+                    tags: [
+                      {
+                        name: "Vegetarian",
+                        category: "Meat preference",
+                      },
+                      {
+                        name: "Vegan",
+                        category: "Meat preference",
+                      }
+                    ],
                     favorite: true,
                 },
                 {
                     id: 2,
                     name: "tofu (keto,vegan)",
                     description: "Maecenas lobortis varius augue, ac tincidunt lacus semper maximus. Integer tincidunt gravida leo, quis blandit odio venenatis vel. Morbi ac urna at dui pretium iaculis.",
-                    tags: ["Keto", "Vegan"],
+                    tags: [
+                      {
+                        name: "Keto",
+                        category: "Diet",
+                      },
+                      {
+                        name: "Vegan",
+                        category: "Meat preference",
+                      }
+                    ],
                     favorite: false,
                 },
                 {
                     id: 3,
                     name: "just veg",
                     description: "Suspendisse potenti. Nulla sollicitudin massa nec fringilla ullamcorper. Vestibulum urna mi, vulputate non pellentesque quis, mollis id justo. Etiam consectetur arcu in pretium efficitur. Phasellus tincidunt magna non ex imperdiet auctor. Nam hendrerit dolor tellus, bibendum tristique tellus semper ac. Nulla interdum magna ligula, ut cursus mauris ullamcorper id. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris commodo libero metus, interdum convallis velit pharetra et. In hendrerit lacus id auctor interdum. In nec eros at tortor pharetra luctus eu vel nibh. Donec eget rhoncus quam. Praesent et augue at diam porttitor iaculis. Donec sit amet justo nisi.",
-                    tags: ["Vegetarian"],
+                    tags: [
+                      {
+                        name: "Vegetarian",
+                        category: "Meat preference",
+                      },
+                      {
+                        name: "Vegan",
+                        category: "Meat preference",
+                      }
+                    ],
                     favorite: true,
                 },
                 {
                     id: 4,
                     name: "just veg",
                     description: "Aliquam auctor nunc at leo pharetra, vitae auctor arcu tempor. Sed porta magna nec mollis pharetra. Vivamus mollis augue ut arcu luctus scelerisque. Proin porttitor elit nisi, eget facilisis mi mollis nec. Proin posuere pulvinar porttitor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
-                    tags: ["Vegetarian"],
+                    tags: [
+                      {
+                        name: "Vegetarian",
+                        category: "Meat preference",
+                      },
+                    ],
                     favorite: false,
                 },
                 {
                     id: 5,
                     name: "just veg",
                     description: "Aliquam blandit erat dui, nec scelerisque magna lobortis in. Morbi lobortis nisi orci. Vestibulum scelerisque velit quam, vitae mattis lorem mattis vel. Maecenas enim lacus, molestie quis purus vel, auctor malesuada turpis. Pellentesque vulputate, enim vel pulvinar pharetra, velit est gravida velit, ut ultrices dolor quam non risus. Nullam gravida fringilla orci et pretium. Donec id massa turpis. Curabitur at suscipit diam.",
-                    tags: ["Vegetarian"],
+                    tags: [
+                      {
+                        name: "Vegetarian",
+                        category: "Meat preference",
+                      },
+                    ],
                     favorite: true,
                 },
                 {
                     id: 6,
                     name: "just veg",
                     description: "Aliquam blandit erat dui, nec scelerisque magna lobortis in. Morbi lobortis nisi orci. Vestibulum scelerisque velit quam, vitae mattis lorem mattis vel. Maecenas enim lacus, molestie quis purus vel, auctor malesuada turpis. Pellentesque vulputate, enim vel pulvinar pharetra, velit est gravida velit, ut ultrices dolor quam non risus. Nullam gravida fringilla orci et pretium. Donec id massa turpis. Curabitur at suscipit diam.",
-                    tags: ["Vegetarian"],
+                    tags: [
+                      {
+                        name: "Vegetarian",
+                        category: "Meat preference",
+                      },
+                    ],
                     favorite: false,
 
                 },
@@ -263,21 +351,47 @@ var app = function() {
                 "Keto": false,
                 "Vegan": false,
             },
+            filters: {},
+            /*
+
+            filters: {
+              "Meat preference": {
+                "Vegetarian": {
+                  active: false,
+                  favorite: false,
+                }
+                "Vegan": {
+                  active: false,
+                  favorite: false,
+                },
+              },
+              "Diet": {
+                "Keto": {
+                  active: false,
+                  favorite: false,
+                }
+              }
+            }
+
+             */
             tags: [
                 {
                     id: 1,
                     name: "Vegetarian",
                     favorite: true,
+                    category: "Meat preference",
                 },
                 {
                     id: 2,
                     name: "Keto",
                     favorite: false,
+                    category: "Diet",
                 },
                 {
                     id: 3,
                     name: "Vegan",
                     favorite: true,
+                    category: "Meat preference",
                 },
             ],
         },
@@ -285,9 +399,11 @@ var app = function() {
     });
 
     //self.func.getTags();
-    //self.func.getRecipes();
+    //self.func.getrecipes();
 
     // not calling self.func.updateFilteredRecipes() b/c getRecipes() already does
+
+    self.func.generateFilters();
 
     self.func.updateFilteredRecipes();
 

@@ -50,44 +50,36 @@ var DOWNLOADS_DIR = "{{=URL('default', 'download')}}";
 
     <div class="col-sm-3 h-100">
 
-			<div class="card mb-4">
+
+			<div class="card mb-4" v-for="(categoryTags, categoryName) in filters">
 				<div class="card-header">
-					Tags:
+          ${categoryName}
 				</div>
 				<div class="list-group list-group-flush">
           <button 
-            v-for="(tag, index) in tags" 
-            v-bind:class="{'active': isActiveFilter(tag.name)}" 
-            v-on:click="toggleTagByName(tag.name);"
+            v-for="(tagValue, tagName) in categoryTags" 
             class="list-group-item list-group-item-action tag-button" 
+            v-on:click="toggleTag(categoryName, tagName)"
+            v-bind:class="{'active': isActiveTag(categoryName, tagName)}" 
           >
-            ${tag.name} 
-              
+            ${tagName}
+
             <div 
               class="btn btn-sm btn-primary tag-heart float-right"
-              v-bind:class="{
-                'invisible': !isActiveFilter(tag.name),
-              }"
-              v-on:click="toggleTagFavorite(tag)"
+              v-bind:class="{'invisible': !isActiveTag(categoryName, tagName)}" 
+              v-on:click="toggleTagFavorite(categoryName, tagName)"
             >
               <i 
-                class="fa-heart"
+                class="fa-heart far"
                 v-bind:class="{
-                  'far': isFavoriteTag(tag),
-                  'fa': !isFavoriteTag(tag)
+                  'far': tagValue.favorite,
+                  'fa': tagValue.favorite 
                 }"
               ></i>
             </div>
           </button>
 				</div>
 			</div>
-
-      <!--
-      <div class="list-group mt-4">
-        <span class="list-group-item">Ingredients:</span>
-        <button v-for="(tag, index) in tags" type="button" v-bind:class="{'active': isActiveFilter(tag.name)}" class="list-group-item list-group-item-action" v-on:click="toggleTag(index)">${tag.name}</button>
-      </div>
-      -->
 
     </div>
 
@@ -104,15 +96,15 @@ var DOWNLOADS_DIR = "{{=URL('default', 'download')}}";
           <div class="card-footer">
             <small class="text-muted">Tags:</small>
             <button
-              v-for="tagName in recipe.tags"
+              v-for="tag in recipe.tags"
               type="button"
               class="btn btn-light btn-sm mr-2"
               v-bind:class="{
-                'active': isActiveFilter(tagName)
+                'active': isActiveTag(tag.category, tag.name)
               }"
-              v-on:click="toggleTagByName(tagName)"
+              v-on:click="toggleTagByName(tag.name)"
             >
-              ${tagName}
+              ${tag.name}
             </button>
             <button 
               class="btn btn-light float-right"
