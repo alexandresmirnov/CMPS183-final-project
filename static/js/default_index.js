@@ -140,6 +140,8 @@ var app = function() {
         // TODO: optimize this
         self.vue.filteredRecipes = [];
 
+        console.log("about to start filtering recipes with filters:", self.vue.filters);
+
         var willFilterRecipes = self.vue.searchString != "" ? self.vue.searchedRecipes : self.vue.allRecipes;
 
         if(self.vue.filtersOn){
@@ -193,6 +195,8 @@ var app = function() {
       for(var i = 0; i < tags.length; i++){
         tag = tags[i];
         category = tag.category;
+
+        if(tag.favorite) self.vue.filtersOn = true;
 
         if(filters[category] == null){
           filters[category] = {};
