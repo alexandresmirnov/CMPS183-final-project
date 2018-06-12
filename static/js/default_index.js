@@ -100,7 +100,7 @@ var app = function() {
 
       for(var i = 0; i < self.vue.allRecipes.length; i++){
         var recipe = self.vue.allRecipes[i];
-        var recipeText = recipe.name + " " + recipe.description.toLowerCase(); // get both title content
+        var recipeText = recipe.name.toLowerCase() + " " + recipe.description.toLowerCase(); // get both title content
 
         if(recipeText.indexOf(searchString) > -1){ // if that text is inside, add it
           matchingRecipes.push(recipe);

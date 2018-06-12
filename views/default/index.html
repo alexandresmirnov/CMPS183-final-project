@@ -12,6 +12,7 @@ var API = {
 };
 
 var DOWNLOADS_DIR = "{{=URL('default', 'download')}}";
+var RECIPES_PATH = "{{=URL('default', 'recipe')}}";
 
 var USER_ID = "{{=auth.user.id if auth.user is not None else -1}}"
 
@@ -20,20 +21,7 @@ var USER_ID = "{{=auth.user.id if auth.user is not None else -1}}"
 
 <main role="main" id="vue-div">
 
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
-  <div class="container">
-    <main role="main" id="vue-div">
-
-        <h1 class="display-3">The Food Dude</h1>
-          <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-      
-
-    <p><a class="btn btn-primary btn-lg" href="{{=URL('default', 'aboutus')}}" role="button">About Us &raquo;</a></p>
-  </div>
-</div>
-
-<div class="container">
+<div class="container mt-4">
 
   <div class="row searchFilter" >
 
@@ -41,9 +29,6 @@ var USER_ID = "{{=auth.user.id if auth.user is not None else -1}}"
 			<form class="form-group row">
 				<div class="input-group input-group-lg mb-2">
 					<input type="text" class="form-control" placeholder="Find a recipe" aria-label="Search" aria-describedby="basic-addon2" v-model="searchString" v-on:keyUp="searchRecipes()" v-on:keyUp.delete="searchRecipes()">
-					<div class="input-group-append">
-						<button class="btn btn-outline-secondary" type="button" v-on:click="searchRecipes()" >Search</button>
-					</div>
 				</div>
 			</form>
     </div>
@@ -92,9 +77,8 @@ var USER_ID = "{{=auth.user.id if auth.user is not None else -1}}"
 				<div class="card" v-for="(recipe, index) in filteredRecipes">
           <img v-if="recipe.image != '' && recipe.image != null" class="card-img-top" v-bind:src='DOWNLOADS_DIR + "/" + recipe.image'>
 					<div class="card-body">
-						<h3 class="card-title">${recipe.name}</h2>
+            <h3 class="card-title"><a v-bind:href='RECIPES_PATH + "/" + recipe.id'>${recipe.name}</a></h2>
 						<p class="card-text">${recipe.description}<p/>
-						<a class="card-link" v-bind:href='"/finalproject/default/recipe/"+recipe.id'>View recipe</a>
 					</div>
           <div class="card-footer clearfix">
             <div class="btn btn-sm invisible float-left" v-if="recipe.tags.length == 0">&nbsp;</div>

@@ -23,7 +23,21 @@ var app = function() {
 	  self.func.removeFavoriteRecipe = function(recipeIndex){
       console.log("remove favorite recipe", recipeIndex);
 
+      var recipeID = self.vue.favoriteRecipes[recipeIndex].id;
+
+      console.log("removing recipeID: ", recipeID);
+
       self.vue.favoriteRecipes.splice(recipeIndex, 1);
+
+      $.post(API.toggleFavoriteRecipe,
+        {
+          user_id: USER_ID,
+          recipe_id: recipeID,
+        },
+        function(data){
+
+        }
+      );
     };
 
     self.func.showTimes = function(e){

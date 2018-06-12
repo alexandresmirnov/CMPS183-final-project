@@ -1,5 +1,3 @@
-// This is the js for the default/index.html view.
-
 var app = function() {
 
     var self = {
@@ -22,6 +20,25 @@ var app = function() {
         );
     };
 
+    self.func.isFavoriteRecipe = function(recipe){
+      return recipe.favorite;
+    };
+
+
+		self.func.toggleRecipeFavorite = function(recipe){
+      recipe.favorite = !recipe.favorite;
+
+      $.post(API.toggleFavoriteRecipe,
+        {
+          user_id: USER_ID,
+          recipe_id: recipe.id
+        },
+        function(data){
+        }
+      );
+    };
+
+
 
     // Complete as needed.
     self.vue = new Vue({
@@ -29,7 +46,9 @@ var app = function() {
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
-            recipe: {},
+            recipe: {
+              tags: [] // dummy tags to stop silly vue error
+            },
         },
         methods: self.func
     });

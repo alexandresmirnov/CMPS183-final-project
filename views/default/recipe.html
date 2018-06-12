@@ -5,11 +5,15 @@
 
 var API = {
     getRecipe: "{{=URL('api', 'get_recipe')}}",
+    toggleFavoriteRecipe: "{{=URL('api', 'toggle_favorite_recipe')}}",
 };
 
 var RECIPE_ID = "{{=recipe_id}}";
 
 var DOWNLOADS_DIR = "{{=URL('default', 'download')}}";
+
+var USER_ID = "{{=auth.user.id if auth.user is not None else -1}}"
+
 
 
 
@@ -27,14 +31,37 @@ var DOWNLOADS_DIR = "{{=URL('default', 'download')}}";
       <p class="card-text">${recipe.description}.</p>
       <small class="text-muted">Prep time: ${recipe.prep_time} minutes, Cook time: ${recipe.cook_time} minutes</small>
     </div>
-    <div class="card-footer" v-if="recipe.tags != null && recipe.tags.length > 0">
-      <div class="float-left">
-        <small class="text-muted">Tags:</small>
-        <button v-for="tag in recipe.tags" class="btn btn-light btn-sm active ml-2">
-          ${tag.name}
-        </button>
-      </div>
-    </div>
+
+		<div class="card-footer clearfix">
+			<div class="btn btn-sm invisible float-left" v-if="recipe.tags.length == 0">&nbsp;</div>
+			<div class="float-left" v-if="recipe.tags.length > 0">
+				<small class="text-muted">Tags:</small>
+				<button
+					v-for="tag in recipe.tags"
+					type="button"
+					class="btn btn-light btn-sm mr-2 active"
+				>
+					${tag.name}
+				</button>
+
+			</div>
+			<button 
+				class="btn btn-light position-absolute recipe-heart-icon" 
+				v-on:click="toggleRecipeFavorite(recipe)"
+			>
+				<i 
+					class="fa-heart" 
+					v-bind:class="{
+						'far': !isFavoriteRecipe(recipe), 
+						'fas': isFavoriteRecipe(recipe)
+					}"
+				></i>
+			</button>
+		</div>
+		<!-- end card-footer -->
+
+
+
   </div>
 
   <div class="card mt-4">
