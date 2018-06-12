@@ -1,25 +1,44 @@
 def populate_recipe(r):
-    tags = []
-    if r.tags:
-        for tagid in r.tags:
-            tag = (db(db.tags.id == tagid).select().first())
-            if tag:
-                tags.append(tag)
 
-    logger.info(tags)
+    logger.info("--------------------populating recipe: -----------")
+    logger.info(r)
 
-    return dict(
-        id = r.id,
-        name = r.name,
-        image = r.image,
-        description = r.description,
-        instr = r.instr,
-        prep_time = r.prep_time,
-        cook_time = r.cook_time,
-        ingredients = r.ingredients,
-        tags = tags
-    )
+    if(r is None):
+        logger.info("populating null recipe")
+        return None
+    else:
+        favorite = None
 
+        if auth.user is not None:
+            user_favorites = db(db.auth_user.id == auth.user.id).select().first().favorites
+
+            for user_favorite in user_favorites:
+                if r.id == user_favorite:
+                    favorite = True
+                    break
+                favorite = False
+
+        tags = []
+        if r.tags:
+            for tagid in r.tags:
+                tag = (db(db.tags.id == tagid).select().first())
+                if tag:
+                    tags.append(tag)
+
+        logger.info(tags)
+
+        return dict(
+            id = r.id,
+            name = r.name,
+            image = r.image,
+            description = r.description,
+            instr = r.instr,
+            prep_time = r.prep_time,
+            cook_time = r.cook_time,
+            ingredients = r.ingredients,
+            tags = tags,
+            favorite = favorite,
+        )
 
 
 
@@ -77,7 +96,10 @@ def get_favorite_recipes():
 
     for favorite_id in user.favorites:
         favorite_recipe = (db(db.recipes.id == favorite_id).select().first())
-        favorite_recipes.append(populate_recipe(favorite_recipe))
+        populated_recipe = populate_recipe(favorite_recipe)
+
+        if populated_recipe is not None:
+            favorite_recipes.append(populated_recipe)
 
     return response.json(dict(favorite_recipes=favorite_recipes))
 
