@@ -81,6 +81,7 @@ var app = function() {
             function(data){
                 console.log("data: ", data);
                 self.vue.allRecipes = data.recipes;
+                $('#vue-div').addClass('show');
                 self.func.updateFilteredRecipes();
             }
         );

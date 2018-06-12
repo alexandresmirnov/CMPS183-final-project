@@ -15,6 +15,7 @@ var app = function() {
             },
             function(data){
                 console.log("data: ", data);
+                $('#vue-div').addClass('show');
                 self.vue.recipe = data.recipe;
             }
         );
