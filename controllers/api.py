@@ -1,3 +1,28 @@
+def populate_recipe(r):
+    tags = []
+    if r.tags:
+        for tagid in r.tags:
+            tag = (db(db.tags.id == tagid).select().first())
+            if tag:
+                tags.append(tag)
+
+    logger.info(tags)
+
+    return dict(
+        id = r.id,
+        name = r.name,
+        image = r.image,
+        description = r.description,
+        instr = r.instr,
+        prep_time = r.prep_time,
+        cook_time = r.cook_time,
+        ingredients = r.ingredients,
+        tags = tags
+    )
+
+
+
+
 def get_recipes():
     logger.info("get_recipes")
 
@@ -7,26 +32,8 @@ def get_recipes():
     response_recipes = []
 
     for r in recipes:
-        tags = []
-        if r.tags:
-            for tagid in r.tags:
-                tag = (db(db.tags.id == tagid).select().first())
-                if tag:
-                    tags.append(tag)
+        response_recipes.append(populate_recipe(r))
 
-        logger.info(tags)
-
-        response_recipes.append(dict(
-            id = r.id,
-            name = r.name,
-            image = r.image,
-            description = r.description,
-            instr = r.instr,
-            prep_time = r.prep_time,
-            cook_time = r.cook_time,
-            ingredients = r.ingredients,
-            tags = tags
-        ))
 
     return response.json(dict(recipes = response_recipes))
 
@@ -47,25 +54,8 @@ def get_recipe():
     if not r:
         logger.info("no such recipe")
 
-    if r.tags:
-        for tagid in r.tags:
-            tag = (db(db.tags.id == tagid).select().first())
-            if tag:
-                tags.append(tag)
 
-    recipe = {
-        'id': r.id,
-        'name': r.name,
-        'image': r.image,
-        'description': r.description,
-        'instr': r.instr,
-        'prep_time': r.prep_time,
-        'cook_time': r.cook_time,
-        'ingredients': r.ingredients,
-        'tags': tags
-    }
-
-    return response.json(dict(recipe=recipe))
+    return response.json(dict(recipe=populate_recipe(r)))
 
 
 def get_tags():
@@ -87,7 +77,7 @@ def get_favorite_recipes():
 
     for favorite_id in user.favorites:
         favorite_recipe = (db(db.recipes.id == favorite_id).select().first())
-        favorite_recipes.append(favorite_recipe)
+        favorite_recipes.append(populate_recipe(favorite_recipe))
 
     return response.json(dict(favorite_recipes=favorite_recipes))
 

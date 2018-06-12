@@ -35,17 +35,20 @@ var USER_ID = "{{=auth.user.id}}";
 						<p class="card-text">${recipe.description}<p/>
 						<a class="card-link" v-bind:href='"/finalproject/default/recipe/"+recipe.id'>View recipe</a>
 					</div>
-          <div class="card-footer">
-            <small class="text-muted">Tags:</small>
-            <button
-              v-for="tag in recipe.tags"
-              type="button"
-              class="btn btn-light btn-sm mr-2 active"
-            >
-              ${tag.name}
-            </button>
+          <div class="card-footer clearfix">
+            <div class="btn btn-sm invisible float-left" v-if="recipe.tags.length == 0">&nbsp;</div>
+            <div class="float-left" v-if="recipe.tags.length > 0">
+              <small class="text-muted">Tags:</small>
+              <button
+                v-for="tag in recipe.tags"
+                type="button"
+                class="btn btn-light btn-sm mr-2 active"
+              >
+                ${tag.name}
+              </button>
+            </div>
             <button 
-              class="btn btn-light float-right"
+              class="btn btn-light position-absolute recipe-heart-icon"
               v-on:click="removeFavoriteRecipe(index)"
 		          v-on:mouseenter="showTimes"	
 		          v-on:mouseleave="hideTimes"	
