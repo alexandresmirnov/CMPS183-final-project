@@ -48,6 +48,7 @@ var USER_ID = "{{=auth.user.id if auth.user is not None else -1}}"
 			<button 
 				class="btn btn-light position-absolute recipe-heart-icon" 
 				v-on:click="toggleRecipeFavorite(recipe)"
+        v-if="USER_ID >= 0"
 			>
 				<i 
 					class="fa-heart" 
