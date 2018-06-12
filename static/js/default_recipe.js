@@ -7,7 +7,10 @@ var app = function() {
     Vue.config.silent = false; // show all warnings
 
     self.func.getRecipe = function(){
+
         console.log("getRecipe");
+
+        console.log(API.getRecipe);
 
         $.post(API.getRecipe,
             {
