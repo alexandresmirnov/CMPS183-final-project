@@ -1,0 +1,65 @@
+{{extend 'layout.html'}} {{block head}}
+<script src="{{=URL('static', 'js/default_upload.js')}}"></script>
+{{end}}
+
+<main role="main" id="vue-div">
+
+<div class="container">
+
+  <div class="card mt-4">
+    <div class="card-body">
+
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input v-model="recipe.name" type="text" class="form-control" id="name">
+			</div>
+
+			<div class="form-group">
+				<label for="description">Description</label>
+				<textarea v-model="recipe.description" class="form-control" id="description"></textarea>
+			</div>
+
+			<div class="form-group">
+				<label for="image">Image</label>
+				<input v-model="recipe.image" type="file" class="form-control" id="image">
+			</div>
+
+			<div class="form-group">
+				<label for="cookTime">Cook time</label>
+				<div class="input-group">
+					<input v-model="recipe.cookTime" type="number" class="form-control" id="cookTime" placeholder="0">
+          <div class="input-group-append">
+            <span class="input-group-text">minutes</span>
+          </div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="prepTime">Prep time</label>
+				<div class="input-group">
+					<input v-model="recipe.prepTime" type="number" class="form-control" id="prepTime" placeholder="0">
+          <div class="input-group-append">
+            <span class="input-group-text">minutes</span>
+          </div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="tags">Tags</label>
+				<select class="form-control" id="tags">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+				</select>
+			</div>
+
+
+      <button v-on:click="createRecipe" class="btn btn-primary">Upload</button>
+    </div>
+  </div>
+
+</div> <!-- /container -->
+
+</main>

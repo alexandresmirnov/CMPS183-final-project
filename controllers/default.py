@@ -22,6 +22,10 @@ def index():
     logger.info("index")
     return dict(page = "index")
 
+def upload():
+    logger.info("upload")
+    return dict(page = "upload")
+
 # specific recipe
 # will get tags, ingredients, etc. and return everything
 # expected format of /recipe/id
