@@ -33,3 +33,9 @@ body {
   padding-left: 2;
   padding-right: 3;
 }
+
+/* hack to make heart display in correct position */
+.recipe-heart-icon {
+  right: 1.25rem;
+  height: 31px;
+}

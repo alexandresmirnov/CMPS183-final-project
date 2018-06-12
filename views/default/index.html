@@ -94,6 +94,7 @@ var DOWNLOADS_DIR = "{{=URL('default', 'download')}}";
 						<a class="card-link" v-bind:href='"/finalproject/default/recipe/"+recipe.id'>View recipe</a>
 					</div>
           <div class="card-footer clearfix">
+            <div class="btn btn-sm invisible float-left" v-if="recipe.tags.length == 0">&nbsp;</div>
             <div class="float-left" v-if="recipe.tags.length > 0">
               <small class="text-muted">Tags:</small>
               <button
@@ -110,7 +111,7 @@ var DOWNLOADS_DIR = "{{=URL('default', 'download')}}";
 
             </div>
             <button 
-              class="btn btn-light float-right"
+              class="btn btn-light position-absolute recipe-heart-icon" 
               v-on:click="toggleRecipeFavorite(recipe)"
             >
               <i 
