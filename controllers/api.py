@@ -78,12 +78,28 @@ def get_recipe():
 
 
 def get_tags():
-    logger.info("get_recipes")
+    logger.info("get_tags")
 
     q = (db.tags.id > 0)
     tags = db(q).select()
 
-    return response.json(dict(tags=tags))
+    response_tags = []
+
+    if auth.user is not None:
+        user = db(db.auth_user.id == auth.user.id).select().first()
+        user_favorite_tags = user.favorite_tags
+
+        for tag in tags:
+            response_tags.append(dict(
+                id = tag.id,
+                name = tag.name,
+                category = tag.category,
+                favorite = int(tag.id) in user_favorite_tags,
+            ))
+    else:
+        response_tags = tags
+
+    return response.json(dict(tags=response_tags))
 
 
 def get_favorite_recipes():
@@ -127,6 +143,42 @@ def toggle_favorite_recipe():
 
     user.update_record(
         favorites = user_favorites
+    )
+
+    return "ok"
+
+def toggle_favorite_tag():
+    logger.info("toggle_favorite_tag")
+
+    t_id = int(request.vars.tag_id)
+    u_id = request.vars.user_id
+
+    user = db(db.auth_user.id == u_id).select().first()
+
+    logger.info("user: ")
+    logger.info(user)
+
+
+    user_favorite_tags = user.favorite_tags
+
+    logger.info("user favorite tags:")
+    logger.info(user_favorite_tags)
+
+    if user_favorite_tags is None:
+        logger.info("no favorite tags")
+        user_favorite_tags = []
+    else:
+        logger.info("has favorite tags")
+        if t_id in user_favorite_tags:
+            logger.info("favorite now, so removing from list")
+            user_favorite_tags.remove(t_id)
+        else:
+            logger.info("not favorite, adding in")
+            user_favorite_tags.append(t_id)
+
+
+    user.update_record(
+        favorite_tags = user_favorite_tags
     )
 
     return "ok"

@@ -69,7 +69,8 @@ plugins = PluginManager()
 # add favorites field to auth_user
 
 auth.settings.extra_fields['auth_user'] = [
-        Field('favorites', 'list:reference recipes', writable=False, readable=False)
+        Field('favorites', 'list:reference recipes', writable=False, readable=False),
+        Field('favorite_tags', 'list:reference tags', writable=False, readable=False)
         ]
 
 

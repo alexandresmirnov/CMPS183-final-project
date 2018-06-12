@@ -197,7 +197,7 @@ var app = function() {
           filters[category] = {};
         }
         filters[category][tag.name] = {
-          active: false,
+          active: tag.favorite,
           favorite: tag.favorite
         }
       }
@@ -242,8 +242,32 @@ var app = function() {
       return this.$data.filters[categoryName][tagName].active;
     };
 
+
+    self.func.tagNameToID = function(tagName){
+
+      for(var i = 0; i < self.vue.tags.length; i++){
+        var tag = self.vue.tags[i];
+
+        if(tag.name == tagName){
+          return tag.id;
+        }
+      }
+
+      return -1;
+    };
+
+
     self.func.toggleTagFavorite = function(categoryName, tagName){
       self.vue.filters[categoryName][tagName].favorite = !self.vue.filters[categoryName][tagName].favorite;
+
+      $.post(API.toggleFavoriteTag,
+        {
+          user_id: USER_ID,
+          tag_id: self.func.tagNameToID(tagName),
+        },
+        function(data){
+        }
+      );
 
       event.stopPropagation();
     };
