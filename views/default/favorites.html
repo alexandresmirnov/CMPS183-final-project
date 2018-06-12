@@ -1,21 +1,5 @@
 {{extend 'layout.html'}} {{block head}}
 <script src="{{=URL('static', 'js/default_favorites.js')}}"></script>
-
-<script>
-
-var API = {
-    getFavoriteRecipes: "{{=URL('api', 'get_favorite_recipes')}}",
-    toggleFavoriteRecipe: "{{=URL('api', 'toggle_favorite_recipe"')}}",
-};
-
-var DOWNLOADS_DIR = "{{=URL('default', 'download')}}";
-var RECIPES_PATH = "{{=URL('default', 'recipe')}}";
-
-var USER_ID = "{{=auth.user.id}}";
-
-
-
-</script>
 {{end}}
 
 

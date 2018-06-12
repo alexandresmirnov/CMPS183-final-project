@@ -2,21 +2,7 @@
 <script src="{{=URL('static', 'js/default_recipe.js')}}"></script>
 
 <script>
-
-var API = {
-    getRecipe: "{{=URL('api', 'get_recipe')}}",
-    toggleFavoriteRecipe: "{{=URL('api', 'toggle_favorite_recipe')}}",
-};
-
 var RECIPE_ID = "{{=recipe_id}}";
-
-var DOWNLOADS_DIR = "{{=URL('default', 'download')}}";
-
-var USER_ID = "{{=auth.user.id if auth.user is not None else -1}}"
-
-
-
-
 </script>
 {{end}}
 

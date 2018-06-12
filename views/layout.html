@@ -12,6 +12,22 @@
 
     {{include "web2py_ajax.html"}}
 
+<script>
+var API = {
+    getTags: "{{=URL('api', 'get_tags')}}",
+    getRecipes: "{{=URL('api', 'get_recipes')}}",
+    getRecipe: "{{=URL('api', 'get_recipe')}}",
+    getFavoriteRecipes: "{{=URL('api', 'get_favorite_recipes')}}",
+    toggleFavoriteRecipe: "{{=URL('api', 'toggle_favorite_recipe')}}",
+    toggleFavoriteTag: "{{=URL('api', 'toggle_favorite_tag')}}",
+};
+
+var DOWNLOADS_DIR = "{{=URL('default', 'download')}}";
+var RECIPES_PATH = "{{=URL('default', 'recipe')}}";
+
+var USER_ID = "{{=auth.user.id if auth.user is not None else -1}}";
+</script>
+
 
     {{block head}}{{end}}
   </head>
@@ -48,9 +64,11 @@
           <li class="nav-item">
             <a class="nav-link" href="{{=URL('default', 'aboutus')}}">About Us</a>
           </li>
+        	{{if auth.user is not None:}}
           <li class="nav-item">
             <a class="nav-link" href="{{=URL('default', 'favorites')}}">Favorite Recipes</a>
           </li>
+			    {{pass}}	
 
 
 
