@@ -51,14 +51,24 @@ var app = function() {
 
     */
 
+
+    // necessary to set up all callbacks properly
+    var fetchServerData = function(){
+
+      self.func.getTags(self.func.getRecipes);
+
+    }
+
     // load in tags from server
-    self.func.getTags = function(){
+    self.func.getTags = function(callback){
         console.log("getRecipes");
         $.post(API.getTags,
             {},
             function(data){
                 console.log("tags data: ", data);
                 self.vue.tags = data.tags;
+                self.func.generateFilters();
+                callback();
             }
         );
     };
@@ -393,14 +403,11 @@ var app = function() {
         methods: self.func
     });
 
-    //self.func.getTags();
-    //self.func.getrecipes();
 
-    // not calling self.func.updateFilteredRecipes() b/c getRecipes() already does
+    fetchServerData();
 
-    self.func.generateFilters();
 
-    self.func.updateFilteredRecipes();
+    //self.func.updateFilteredRecipes();
 
     return self;
 };

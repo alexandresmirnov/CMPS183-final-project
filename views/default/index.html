@@ -93,19 +93,22 @@ var DOWNLOADS_DIR = "{{=URL('default', 'download')}}";
 						<p class="card-text">${recipe.description}<p/>
 						<a class="card-link" v-bind:href='"/finalproject/default/recipe/"+recipe.id'>View recipe</a>
 					</div>
-          <div class="card-footer">
-            <small class="text-muted">Tags:</small>
-            <button
-              v-for="tag in recipe.tags"
-              type="button"
-              class="btn btn-light btn-sm mr-2"
-              v-bind:class="{
-                'active': isActiveTag(tag.category, tag.name)
-              }"
-              v-on:click="toggleTag(tag.category, tag.name)"
-            >
-              ${tag.name}
-            </button>
+          <div class="card-footer clearfix">
+            <div class="float-left" v-if="recipe.tags.length > 0">
+              <small class="text-muted">Tags:</small>
+              <button
+                v-for="tag in recipe.tags"
+                type="button"
+                class="btn btn-light btn-sm mr-2"
+                v-bind:class="{
+                  'active': isActiveTag(tag.category, tag.name)
+                }"
+                v-on:click="toggleTag(tag.category, tag.name)"
+              >
+                ${tag.name}
+              </button>
+
+            </div>
             <button 
               class="btn btn-light float-right"
               v-on:click="toggleRecipeFavorite(recipe)"

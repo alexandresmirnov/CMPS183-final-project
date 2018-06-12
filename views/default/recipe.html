@@ -31,7 +31,7 @@ var DOWNLOADS_DIR = "{{=URL('default', 'download')}}";
       <div class="float-left">
         <small class="text-muted">Tags:</small>
         <button v-for="tag in recipe.tags" class="btn btn-light btn-sm active ml-2">
-          ${tag}
+          ${tag.name}
         </button>
       </div>
     </div>

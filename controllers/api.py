@@ -7,14 +7,14 @@ def get_recipes():
     response_recipes = []
 
     for r in recipes:
-        tag_names = []
+        tags = []
         if r.tags:
             for tagid in r.tags:
                 tag = (db(db.tags.id == tagid).select().first())
                 if tag:
-                    tag_names.append(tag.name)
+                    tags.append(tag)
 
-        logger.info(tag_names)
+        logger.info(tags)
 
         response_recipes.append(dict(
             id = r.id,
@@ -25,7 +25,7 @@ def get_recipes():
             prep_time = r.prep_time,
             cook_time = r.cook_time,
             ingredients = r.ingredients,
-            tags = tag_names
+            tags = tags
         ))
 
     return response.json(dict(recipes = response_recipes))
@@ -42,7 +42,7 @@ def get_recipe():
     q = (db.recipes.id == recipe_id)
     r = db(q).select().first()
     logger.info(r)
-    tag_names = []
+    tags = []
 
     if not r:
         logger.info("no such recipe")
@@ -51,7 +51,7 @@ def get_recipe():
         for tagid in r.tags:
             tag = (db(db.tags.id == tagid).select().first())
             if tag:
-                tag_names.append(tag.name)
+                tags.append(tag)
 
     recipe = {
         'id': r.id,
@@ -62,7 +62,7 @@ def get_recipe():
         'prep_time': r.prep_time,
         'cook_time': r.cook_time,
         'ingredients': r.ingredients,
-        'tags': tag_names
+        'tags': tags
     }
 
     return response.json(dict(recipe=recipe))

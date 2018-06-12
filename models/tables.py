@@ -21,8 +21,7 @@ db.define_table('recipes',
 
 db.define_table('tags',
 				Field('name', 'string'),
-				Field('category1'),
-				Field('category2')
+				Field('category', 'string'),
 
 )
 
@@ -35,7 +34,7 @@ db.define_table('reviews',
 )
 
 db.define_table('users',
-                
+
 )
 
 
