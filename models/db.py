@@ -65,6 +65,15 @@ auth = Auth(db, host_names=myconf.get('host.names'))
 service = Service()
 plugins = PluginManager()
 
+
+# add favorites field to auth_user
+
+auth.settings.extra_fields['auth_user'] = [
+        Field('favorites', 'list:reference recipes', writable=False, readable=False)
+        ]
+
+
+
 # create all tables needed by auth if not custom tables
 auth.define_tables(username=False, signature=False)
 

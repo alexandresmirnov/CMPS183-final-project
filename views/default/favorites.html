@@ -4,10 +4,12 @@
 <script>
 
 var API = {
-    getRecipe: "{{=URL('api', 'get_recipe')}}",
+    getFavoriteRecipes: "{{=URL('api', 'get_favorite_recipes')}}",
 };
 
 var DOWNLOADS_DIR = "{{=URL('default', 'download')}}";
+
+var USER_ID = "{{=auth.user.id}}";
 
 
 

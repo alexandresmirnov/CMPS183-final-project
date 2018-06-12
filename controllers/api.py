@@ -75,3 +75,21 @@ def get_tags():
     tags = db(q).select()
 
     return response.json(dict(tags=tags))
+
+
+def get_favorite_recipes():
+    logger.info("get_favorite_recipes")
+
+    q = (db.auth_user.id == request.vars.user_id)
+    user = db(q).select().first()
+
+    favorite_recipes = []
+
+    for favorite_id in user.favorites:
+        favorite_recipe = (db(db.recipes.id == favorite_id).select().first())
+        favorite_recipes.append(favorite_recipe)
+
+    return response.json(dict(favorite_recipes=favorite_recipes))
+
+
+

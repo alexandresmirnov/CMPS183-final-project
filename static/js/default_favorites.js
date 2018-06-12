@@ -5,6 +5,20 @@ var app = function() {
     };
 
 
+    self.func.getFavoriteRecipes = function(userID){
+
+      console.log("get favorite recipes of", userID);
+
+      $.post(API.getFavoriteRecipes,
+        {
+          user_id: userID,
+        },
+        function(data){
+          console.log(data);
+        }
+      );
+    };
+
 	  self.func.removeFavoriteRecipe = function(recipeIndex){
       console.log("remove favorite recipe", recipeIndex);
 
@@ -121,6 +135,9 @@ var app = function() {
         },
         methods: self.func
     });
+
+
+    self.vue.getFavoriteRecipes(USER_ID);
 
 
     return self;
