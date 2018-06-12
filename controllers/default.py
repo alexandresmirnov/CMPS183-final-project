@@ -53,8 +53,8 @@ def aboutus():
     logger.info("aboutus")
     return dict(message = "TEST")
 
-def favoriterecipes():
-    logger.info("favoriterecipes")
+def favorites():
+    logger.info("favorites")
     return dict(message = "TEST")
 
 # list of recipes

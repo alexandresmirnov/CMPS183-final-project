@@ -27,3 +27,9 @@ body {
         column-count: 2;
     }
 }
+
+/* hack so button doesn't get smaller on hover */
+.recipe-times-icon {
+  padding-left: 2;
+  padding-right: 3;
+}
