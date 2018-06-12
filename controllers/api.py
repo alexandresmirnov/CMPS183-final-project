@@ -104,4 +104,30 @@ def get_favorite_recipes():
     return response.json(dict(favorite_recipes=favorite_recipes))
 
 
+def toggle_favorite_recipe():
+    logger.info("toggle_favorite_recipe")
+
+    r_id = int(request.vars.recipe_id)
+    u_id = request.vars.user_id
+
+    user = db(db.auth_user.id == u_id).select().first()
+
+    user_favorites = user.favorites
+
+    logger.info("CURRENT FAVORITES")
+    logger.info(user_favorites)
+
+    if r_id in user_favorites:
+        logger.info("favorite now, so removing from list")
+        user_favorites.remove(r_id)
+    else:
+        logger.info("not favorite, adding in")
+        user_favorites.append(r_id)
+
+
+    user.update_record(
+        favorites = user_favorites
+    )
+
+    return "ok"
 

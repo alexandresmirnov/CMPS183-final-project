@@ -251,6 +251,15 @@ var app = function() {
 
     self.func.toggleRecipeFavorite = function(recipe){
       recipe.favorite = !recipe.favorite;
+
+      $.post(API.toggleFavoriteRecipe,
+        {
+          user_id: USER_ID,
+          recipe_id: recipe.id
+        },
+        function(data){
+        }
+      );
     };
 
 
