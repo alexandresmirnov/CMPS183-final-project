@@ -2,7 +2,7 @@
 <script src="{{=URL('static', 'js/default_index.js')}}"></script>
 {{end}}
 
-<main role="main" id="vue-div" class="fade">
+<main role="main" id="vue-div" class="fade-content fade"> 
 
 <div class="container mt-4">
 
@@ -20,7 +20,7 @@
 
   <div class="row">
 
-    <div class="col-sm-3 h-100">
+    <div class="col-sm-3">
 
 
 			<div class="card mb-4" v-for="(categoryTags, categoryName) in filters">
@@ -55,7 +55,7 @@
 
     </div>
 
-    <div class="col-sm-9 h-100">
+    <div class="col-sm-9">
 
 			<div class="card-columns" id="recipe-card-columns">
 				<div class="card" v-for="(recipe, index) in filteredRecipes">

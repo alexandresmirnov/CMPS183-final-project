@@ -16,7 +16,7 @@ var app = function() {
         function(data){
           console.log(data);
           self.vue.favoriteRecipes = data.favorite_recipes;
-          $('#vue-div').addClass('show');
+          $('.fade-content').addClass('show');
         }
       );
     };

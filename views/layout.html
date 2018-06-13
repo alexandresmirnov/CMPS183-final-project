@@ -51,7 +51,7 @@ var USER_ID = "{{=auth.user.id if auth.user is not None else -1}}";
 -->
 
 
-<body>
+<body> 
 
   {{if not vars().has_key('page'): page = None}}
 
@@ -112,11 +112,11 @@ var USER_ID = "{{=auth.user.id if auth.user is not None else -1}}";
 
     {{include}}
 
-<footer class="footer">
-  <div class="container">
-    <span class="text-muted"> Copyright 2018 - The Food Dudes </span>
-  </div>
-</footer>
+    <footer class="footer mt-4 fade-content fade">
+      <div class="container">
+        <span class="text-light"> Copyright 2018 - The Food Dudes </span>
+      </div>
+    </footer>
 
 </body>
 

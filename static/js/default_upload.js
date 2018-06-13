@@ -1,6 +1,6 @@
 var app = function() {
 
-  $('#sql_form input[type=image]').addClass('test');
+  $('.fade-content').addClass('show');
 
   var self = {
     func: {}
@@ -49,8 +49,16 @@ var app = function() {
     this.$data.recipe.ingredients.push("");
   };
 
+  self.func.removeIngredient = function(){
+    this.$data.recipe.ingredients.splice(-1, 1);
+  };
+
   self.func.addInstruction = function(){
     this.$data.recipe.instr.push("");
+  };
+
+  self.func.removeInstruction = function(){
+    this.$data.recipe.instr.splice(-1, 1);
   };
 
   self.func.onImageChange = function(e){
