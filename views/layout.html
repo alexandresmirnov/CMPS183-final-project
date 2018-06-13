@@ -85,7 +85,7 @@ var USER_ID = "{{=auth.user.id if auth.user is not None else -1}}";
 
         {{if auth.user is None:}}
           <ul class=navbar-nav>
-            <li class="nav-item dropdown {{=('active' if page is not None and page == 'user' else '')}}">
+            <li class="nav-item dropleft {{=('active' if page is not None and page == 'user' else '')}}">
               <a href="#" class="nav-link dropleft dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Registration</a>
               <div class="dropdown-menu" aria-labelledby="dropdown01">
                 <a class="dropdown-item" href="{{=URL('default', 'user', args=['login'])}}">Log in</a>
@@ -95,7 +95,7 @@ var USER_ID = "{{=auth.user.id if auth.user is not None else -1}}";
           </ul>
         {{else:}}
           <ul class=navbar-nav>
-            <li class="nav-item dropdown {{=('active' if page is not None and page == 'user' else '')}}">
+            <li class="nav-item dropleft {{=('active' if page is not None and page == 'user' else '')}}">
               <a href="#" class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{=auth.user.first_name}}</a>
               <div class="dropdown-menu" aria-labelledby="dropdown01">
                 <a class="dropdown-item" href="{{=URL('default', 'user', args=['logout'])}}">Log out</a>
@@ -112,11 +112,11 @@ var USER_ID = "{{=auth.user.id if auth.user is not None else -1}}";
 
     {{include}}
 
-    <footer class="footer mt-4 fade-content fade">
-      <div class="container">
-        <span class="text-light"> Copyright 2018 - The Food Dudes </span>
-      </div>
-    </footer>
+<footer >
+  
+    <div class="text-muted text-center fade-content fade"> Copyright 2018 - The Food Dudes </div>
+
+</footer>
 
 </body>
 
