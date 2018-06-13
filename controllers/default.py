@@ -24,7 +24,34 @@ def index():
 
 def upload():
     logger.info("upload")
-    return dict(page = "upload")
+    logger.info("request.vars before form stuff:")
+    logger.info(request.vars)
+
+    form = SQLFORM(db.recipes)
+
+    #form.vars.name = request.vars.name
+    #form.vars.image = request.vars.image
+
+    logger.info("form.vars before process()")
+    logger.info(form.vars)
+
+    if form.process(onvalidation=print_form_vars).accepted:
+        logger.info("accepted form:")
+        redirect(URL('recipe', args=form.vars.id))
+    elif form.errors:
+        logger.info("errors")
+    else:
+        logger.info("something wrong?")
+
+    return dict(
+        page = "upload",
+        form = form,
+    )
+
+def print_form_vars(form):
+    logger.info("printing form vars")
+    logger.info(form.vars)
+
 
 # specific recipe
 # will get tags, ingredients, etc. and return everything

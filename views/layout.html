@@ -21,6 +21,8 @@ var API = {
     toggleFavoriteRecipe: "{{=URL('api', 'toggle_favorite_recipe')}}",
     toggleFavoriteTag: "{{=URL('api', 'toggle_favorite_tag')}}",
     createRecipe: "{{=URL('api', 'create_recipe')}}",
+
+    upload: "{{=URL('default', 'upload')}}",
 };
 
 var DOWNLOADS_DIR = "{{=URL('default', 'download')}}";
@@ -71,6 +73,9 @@ var USER_ID = "{{=auth.user.id if auth.user is not None else -1}}";
         	{{if auth.user is not None:}}
           <li class="nav-item {{=('active' if page is not None and page == 'favorites' else '')}}">
             <a class="nav-link" href="{{=URL('default', 'favorites')}}">Favorite Recipes</a>
+          </li>
+          <li class="nav-item {{=('active' if page is not None and page == 'upload' else '')}}">
+            <a class="nav-link" href="{{=URL('default', 'upload')}}">Upload Recipe</a>
           </li>
 			    {{pass}}	
 

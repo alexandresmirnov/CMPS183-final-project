@@ -188,20 +188,20 @@ def toggle_favorite_tag():
 def create_recipe():
     logger.info("create_recipe")
 
-    logger.info("request.vars: ")
-    logger.info(request.vars)
-
     r = request.vars
 
     r_id = db.recipes.insert(
         name = r.name,
         image = r.image,
         description = r.description,
-        instr = r.instr,
-        prep_time = r.prep_time,
-        cook_time = r.cook_time,
-        ingredients = r.ingredients,
-        tags = r.tags,
+        instr = r['instr[]'],
+        prep_time = int(r.prep_time),
+        cook_time = int(r.cook_time),
+        ingredients = r['ingredients[]'],
+        tags = r['tags[]'],
     )
+
+    logger.info("new recipe created at id: ")
+    logger.info(r_id)
 
     return response.json(dict(r_id = r_id))

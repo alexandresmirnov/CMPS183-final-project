@@ -6,28 +6,32 @@
 
 <div class="container">
 
+  <div id="sql_form" style="display:none">
+    {{=form}}
+  </div>
+
   <div class="card mt-4">
-    <div class="card-body">
+    <form class="card-body" action="#" method="post" enctype="multipart/form-data" id="recipe-form">
 
 			<div class="form-group">
 				<label for="name">Name</label>
-				<input v-model="recipe.name" type="text" class="form-control" id="name">
+				<input v-model="recipe.name" type="text" class="form-control" id="name" name="name">
 			</div>
 
 			<div class="form-group">
 				<label for="description">Description</label>
-				<textarea v-model="recipe.description" class="form-control" id="description"></textarea>
+				<textarea v-model="recipe.description" class="form-control" id="description" name="description"></textarea>
 			</div>
 
 			<div class="form-group">
 				<label for="image">Image</label>
-				<input v-model="recipe.image" type="file" class="form-control" id="image">
+				<input v-on:change="onImageChange" type="file" class="form-control" id="image" name="image">
 			</div>
 
 			<div class="form-group">
 				<label for="cookTime">Cook time</label>
 				<div class="input-group">
-					<input v-model="recipe.cookTime" type="number" class="form-control" id="cookTime" placeholder="0">
+					<input v-model="recipe.cook_time" type="number" class="form-control" id="cookTime" name="cook_time" placeholder="0">
           <div class="input-group-append">
             <span class="input-group-text">minutes</span>
           </div>
@@ -37,7 +41,7 @@
 			<div class="form-group">
 				<label for="prepTime">Prep time</label>
 				<div class="input-group">
-					<input v-model="recipe.prepTime" type="number" class="form-control" id="prepTime" placeholder="0">
+					<input v-model="recipe.prep_time" type="number" class="form-control" id="prepTime" placeholder="0" name="prep_time">
           <div class="input-group-append">
             <span class="input-group-text">minutes</span>
           </div>
@@ -45,19 +49,46 @@
 			</div>
 
 			<div class="form-group">
+				<label for="instructions">Instructions</label>
+				<ul class="list-group">
+					<li v-for="(instruction, index) in recipe.instr" class="list-group-item">
+            <input type="text" class="form-control" v-model="recipe.instr[index]" name="instr">
+          </li>
+          <li class="list-group-item">
+            <div class="btn btn-secondary" v-on:click="addInstruction">Add</div>
+
+          </li>
+				</ul>
+			</div>
+
+			<div class="form-group">
+				<label for="ingredients">Ingredients</label>
+				<ul class="list-group">
+					<li v-for="(ingredient, index) in recipe.ingredients" class="list-group-item">
+            <input type="text" class="form-control" v-model="recipe.ingredients[index]" name="ingredients">
+          </li>
+          <li class="list-group-item">
+            <div class="btn btn-secondary" v-on:click="addIngredient">Add</div>
+
+          </li>
+				</ul>
+			</div>
+
+			<div class="form-group">
 				<label for="tags">Tags</label>
-				<select class="form-control" id="tags">
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
+				<select multiple class="form-control" id="tags" v-model="recipe.tags" name="tags">
+          <optgroup v-for="(categoryValue, categoryName) in tags" v-bind:label="categoryName">
+            <option v-for="(tagID, tagName) in categoryValue" v-bind:value="tagID" name="">${tagName}</option>
+          </optgroup>
 				</select>
 			</div>
 
+      <input name="_formkey" id="formkey" type="hidden">
+      <input name="_formname" id="formname" type="hidden">
 
-      <button v-on:click="createRecipe" class="btn btn-primary">Upload</button>
-    </div>
+
+      <div v-on:click="createRecipe" class="btn btn-primary">Upload</div>
+    </form>
   </div>
 
 </div> <!-- /container -->
