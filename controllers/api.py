@@ -11,6 +11,7 @@ def populate_recipe(r):
 
         if auth.user is not None:
             user_favorites = db(db.auth_user.id == auth.user.id).select().first().favorites
+            user_favorites = user_favorites if user_favorites else []
 
             for user_favorite in user_favorites:
                 if r.id == user_favorite:
