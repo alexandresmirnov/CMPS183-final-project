@@ -39,3 +39,15 @@ body {
   right: 1.25rem;
   height: 31px;
 }
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 5rem;
+  background-color: #343a40;
+  clear:both;
+  text-align: center;
+}
+  
