@@ -128,7 +128,7 @@ def toggle_favorite_recipe():
 
     user = db(db.auth_user.id == u_id).select().first()
 
-    user_favorites = user.favorites
+    user_favorites = user.favorites if user.favorites else []
 
     logger.info("CURRENT FAVORITES")
     logger.info(user_favorites)
