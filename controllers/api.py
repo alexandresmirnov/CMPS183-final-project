@@ -87,7 +87,7 @@ def get_tags():
 
     if auth.user is not None:
         user = db(db.auth_user.id == auth.user.id).select().first()
-        user_favorite_tags = user.favorite_tags
+        user_favorite_tags = user.favorite_tags if user.favorite_tags else []
 
         for tag in tags:
             response_tags.append(dict(

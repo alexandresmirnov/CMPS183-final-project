@@ -2,6 +2,7 @@ cache/*
 errors/*
 sessions/*
 databases/*
+uploads/*
 *.table
 *.log
 *.pyc
