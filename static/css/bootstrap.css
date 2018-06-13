@@ -5685,6 +5685,17 @@ button.close {
     border-top: 1px solid #e9ecef
 }
 
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 5rem;
+  background-color: #343a40;
+  clear:both;
+  text-align: center;
+}
+
 .modal-footer>:not(:first-child) {
     margin-left: .25rem
 }

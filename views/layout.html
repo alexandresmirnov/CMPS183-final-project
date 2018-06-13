@@ -96,17 +96,28 @@ var USER_ID = "{{=auth.user.id if auth.user is not None else -1}}";
                 <a class="dropdown-item" href="{{=URL('default', 'user', args=['logout'])}}">Log out</a>
                 <a class="dropdown-item" href="{{=URL('default', 'user', args=['request_reset_password'])}}">Lost password</a>
               </div>
+
             </li>
           </ul>
 
         {{pass}}
+
       </div>
     </nav>
 
-
     {{include}}
+      <div class ="footer text-center ">
+        <p>The Food Dudes - 2018</p>
+      </div>
+
+
+
 
 </body>
+
+
+
+
 
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
