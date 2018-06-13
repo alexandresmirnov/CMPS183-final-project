@@ -8,26 +8,29 @@ def populate_recipe(r):
         return None
     else:
         favorite = None
-
         if auth.user is not None:
             user_favorites = db(db.auth_user.id == auth.user.id).select().first().favorites
-            user_favorites = user_favorites if user_favorites else []
 
-            for user_favorite in user_favorites:
-                if r.id == user_favorite:
-                    favorite = True
-                    break
+            logger.info("before user_favorites loop")
+            if user_favorites is not None:
+                for user_favorite in user_favorites:
+                    logger.info("user_favorite:")
+                    logger.info(user_favorite)
+                    if r.id == user_favorite:
+                        favorite = True
+                        break
+                    favorite = False
+            else:
                 favorite = False
-
+        logger.info("favorite:")
+        logger.info(favorite)
         tags = []
         if r.tags:
             for tagid in r.tags:
                 tag = (db(db.tags.id == tagid).select().first())
                 if tag:
                     tags.append(tag)
-
         logger.info(tags)
-
         return dict(
             id = r.id,
             name = r.name,
@@ -40,7 +43,6 @@ def populate_recipe(r):
             tags = tags,
             favorite = favorite,
         )
-
 
 
 def get_recipes():
