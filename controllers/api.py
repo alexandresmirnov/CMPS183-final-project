@@ -10,13 +10,16 @@ def populate_recipe(r):
         favorite = None
 
         if auth.user is not None:
-            user_favorites = db(db.auth_user.id == auth.user.id).select().first().favorites
+            user_favorites = db(db.auth_user.id == auth.user.id).select().first().favoritee
             user_favorites = user_favorites if user_favorites else []
 
-            for user_favorite in user_favorites:
-                if r.id == user_favorite:
-                    favorite = True
-                    break
+            if user_favorites is not None:
+                for user_favorite in user_favorites:
+                    if r.id == user_favorite:
+                        favorite = True
+                        break
+                    favorite = False
+            else:
                 favorite = False
 
         tags = []
